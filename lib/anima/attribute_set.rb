@@ -25,8 +25,16 @@ module Anima
     # @api private
     #
     def load(object, attributes)
+      visited = []
       each do |attribute|
         attribute.load(object, attributes)
+        visited << attribute.name
+      end
+
+      overflow = attributes.keys - visited
+
+      unless overflow.empty?
+        raise "Unknown attribute(s) #{overflow.inspect} given when initializing #{object.class.name}"
       end
 
       self

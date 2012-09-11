@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Anima, 'simple integration' do
   subject { class_under_test.new(attributes) }
 
@@ -26,7 +28,21 @@ describe Anima, 'simple integration' do
     its(:lastname) { should eql('Schirp') }
   end
 
-  context 'when instanciates with missing attribute' do
+  context 'with instanciated with extra attributes' do
+    let(:attributes) do 
+      {
+        :firstname => 'Markus',
+        :lastname => 'Schirp',
+        :extra => 'Foo'
+      }
+    end
+
+    it 'should raise error' do
+      expect { subject }.to raise_error(RuntimeError,'Unknown attribute(s) [:extra] given when initializing TestClass')
+    end
+  end
+
+  context 'when instanciated with missing attribute' do
 
     let(:attributes) { {} }
 
