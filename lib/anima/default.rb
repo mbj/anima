@@ -4,7 +4,29 @@ module Anima
   class Default
     include AbstractClass, Immutable
 
-    abstract_method :set
+    # Set default value
+    #
+    # @param [Attribute] attribute
+    # @param [Object] object
+    #
+    # @return [self]
+    #
+    # @api private
+    #
+    def set(attribute, object)
+      attribute.set(object, value(object))
+    end
+
+    # Return default value for object
+    #
+    # @param [Object] object
+    #
+    # @return [Object]
+    #
+    # @api private
+    #
+    abstract_method :value
+
 
     # No default value
     NONE = Class.new(self) do
@@ -27,8 +49,36 @@ module Anima
 
     end.new
 
+    # Generated default value
+    class Generator < self
+
+    private
+
+      # Initialize object
+      #
+      # @api private
+      #
+      # @return [undefined]
+      #
+      def initialize(&block)
+        @block = block
+      end
+
+      # Return generated value
+      #
+      # @return [Object]
+      #
+      # @api private
+      #
+      def value(object)
+        @block.call(object)
+      end
+    end
+
     # Explicit default value
     class Value < self
+
+    private
 
       # Initialize default value
       #
@@ -42,19 +92,17 @@ module Anima
         @value = value
       end
 
-      # Set default value
+      # Return default value
       #
-      # @param [Attribute] attribute
       # @param [Object] object
       #
-      # @return [self]
+      # @return [Object]
       #
       # @api private
       #
-      def set(attribute, object)
-        attribute.set(object, @value)
+      def value(object)
+        @value
       end
-
     end
 
     NIL = Value.new(nil)
