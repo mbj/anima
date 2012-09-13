@@ -20,8 +20,8 @@ module Anima
     #
     # @return [self]
     #
-    def attribute(name)
-      attribute = Attribute.new(name)
+    def attribute(name, klass=Attribute)
+      attribute = klass.new(name)
       attribute.define_reader(self)
       attribute_set.add(attribute)
 
