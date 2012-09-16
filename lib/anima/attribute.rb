@@ -86,20 +86,21 @@ module Anima
     #
     # @api private
     #
-    def default
-      Default::NONE
-    end
+    attr_reader :default
 
   private
+
+    DEFAULT = Default::NONE
 
     # Initialize attribute
     #
     # @param [Symbol] name
+    # @param [Default] default
     #
     # @api private
     #
-    def initialize(name)
-      @name = name
+    def initialize(name, default = DEFAULT)
+      @name, @default = name, default
     end
   end
 end

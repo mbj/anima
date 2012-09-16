@@ -23,8 +23,8 @@ module Anima
   end
 end
 
+require 'anima/default'
 require 'anima/attribute'
 require 'anima/attribute_set'
-require 'anima/default'
 require 'anima/class_methods'
 require 'anima/instance_methods'
