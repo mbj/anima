@@ -32,7 +32,17 @@ module Anima
       self
     end
 
-    # Set value in object
+    # Get attribte value from object
+    #
+    # @param [Object] object
+    #
+    # @return [Object] 
+    #
+    def get(object)
+      object.instance_variable_get(instance_variable_name)
+    end
+
+    # Set attribute value in object
     #
     # @param [Object] object
     # @param [Object] value
