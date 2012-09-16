@@ -25,6 +25,7 @@ end
 
 require 'anima/default'
 require 'anima/attribute'
+require 'anima/attribute/set'
 require 'anima/attribute_set'
 require 'anima/class_methods'
 require 'anima/instance_methods'

@@ -4,16 +4,6 @@ module Anima
   class AttributeSet 
     include Enumerable
 
-    # Initialize attribute set
-    #
-    # @return [undefined]
-    #
-    # @api private
-    #
-    def initialize
-      @index = {}
-    end
-
     # Load attributes into instance
     #
     # @param [Object] object
@@ -71,6 +61,30 @@ module Anima
       @index[attribute.name] = attribute
 
       self
+    end
+
+    # Get attribute
+    #
+    # @param [Symbol]
+    #
+    # @return [Attribute]
+    #
+    # @api private
+    #
+    def get(name)
+      @index.fetch(name)
+    end
+
+  private
+
+    # Initialize object
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def initialize
+      @index = {}
     end
   end
 end

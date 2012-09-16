@@ -5,7 +5,8 @@ describe Anima, 'simple integration' do
 
   let(:code_attribute) do
     Class.new(Anima::Attribute) do
-      def default
+
+      def self.default
         Anima::Default::Generator.new { |object| :foo }
       end
     end
@@ -13,6 +14,7 @@ describe Anima, 'simple integration' do
 
   let(:class_under_test) do
     code_attribute = self.code_attribute
+
     Class.new do
       include Anima
 

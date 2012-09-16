@@ -92,6 +92,16 @@ module Anima
 
     DEFAULT = Default::NONE
 
+    # Return default
+    #
+    # @return [Default]
+    # 
+    # @api private
+    #
+    def self.default
+      self::DEFAULT
+    end
+
     # Initialize attribute
     #
     # @param [Symbol] name
@@ -99,8 +109,9 @@ module Anima
     #
     # @api private
     #
-    def initialize(name, default = DEFAULT)
-      @name, @default = name, default
+    def initialize(name, default = Undefined)
+      @name = name
+      @default = default == Undefined ? self.class.default : default
     end
   end
 end
