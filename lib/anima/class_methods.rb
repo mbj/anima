@@ -14,6 +14,22 @@ module Anima
       @attribute_set ||= AttributeSet.new
     end
 
+    # Hook called when class is inherited
+    #
+    # @param [Class] descendant
+    #
+    # @api private
+    #
+    def inherited(descendant)
+      super
+
+      attribute_set.each do |attribute|
+        descendant.attribute_set.add(attribute)
+      end
+
+      self
+    end
+
     # Create attribute
     #
     # @param [Symbol] name
