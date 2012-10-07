@@ -1,6 +1,6 @@
 module Anima
 
-  # Attribute set 
+  # Set of attributes
   class AttributeSet 
     include Enumerable
 
@@ -24,7 +24,7 @@ module Anima
       overflow = attributes.keys - visited
 
       unless overflow.empty?
-        raise "Unknown attribute(s) #{overflow.inspect} given when initializing #{object.class.name}"
+        raise AttributeError::Unknown.new(object.class, overflow)
       end
 
       self
@@ -42,6 +42,7 @@ module Anima
     #
     def each
       return to_enum unless block_given?
+
       @index.each_value do |attribute|
         yield attribute
       end

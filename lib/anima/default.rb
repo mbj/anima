@@ -38,13 +38,12 @@ module Anima
       #
       # @return [undefined]
       #
-      # @raise RuntimeError
-      #   raises runtime error about missing default
+      # @raise AttributeError::Missing
       #
       # @api private
       #
       def set(attribute, object)
-        raise "No value given for #{attribute.name.inspect} when initializing #{object.class.name}"
+        raise AttributeError::Missing.new(object.class, attribute.name)
       end
 
     end.new

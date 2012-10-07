@@ -38,7 +38,10 @@ describe Anima, 'simple integration' do
     end
 
     it 'should raise error' do
-      expect { subject }.to raise_error(RuntimeError,'Unknown attribute(s) [:extra] given when initializing TestClass')
+      expect { subject }.to raise_error(
+        Anima::AttributeError::Unknown, 
+        'Unknown attribute(s) [:extra] for TestClass'
+      )
     end
   end
 
@@ -47,7 +50,10 @@ describe Anima, 'simple integration' do
     let(:attributes) { {} }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(RuntimeError,'No value given for :firstname when initializing TestClass')
+      expect { subject }.to raise_error(
+        Anima::AttributeError::Missing,
+        'No value given for :firstname on TestClass'
+      )
     end
   end
 end
