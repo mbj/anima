@@ -1,4 +1,4 @@
-require 'immutable'
+require 'adamantium'
 require 'abstract_class'
 
 # Main library namespace and mixin

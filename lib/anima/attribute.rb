@@ -2,7 +2,7 @@ module Anima
 
   # Attribute metadata 
   class Attribute
-    include Immutable
+    include Adamantium
 
     # Return attribute name
     #
