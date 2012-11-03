@@ -14,6 +14,20 @@ module Anima
       @attribute_set ||= AttributeSet.new
     end
 
+    # Return attributes
+    #
+    # @param [Object] object
+    #
+    # @return [Hash]
+    #
+    # @api private
+    #
+    def attributes(object)
+      attribute_set.each_with_object({}) do |attribute, attributes|
+        attributes[attribute.name] = attribute.get(object)
+      end
+    end
+
     # Hook called when class is inherited
     #
     # @param [Class] descendant

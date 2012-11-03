@@ -27,6 +27,6 @@ describe Anima, 'attributes hash' do
   let(:object) { class_under_test.new(attributes) }
 
   specify 'allows to access attributes' do
-    object.attributes.should eql(attributes)
+    class_under_test.attributes(object).should eql(attributes)
   end
 end
