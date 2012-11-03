@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w(README)
 
   s.add_dependency('backports')
-  s.add_dependency('adamantium', '~> 0.0.1')
+  s.add_dependency('adamantium',     '~> 0.0.1')
   s.add_dependency('abstract_class', '~> 0.0.1')
 end

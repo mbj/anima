@@ -2,7 +2,7 @@ module Anima
 
   # Attribute metadata 
   class Attribute
-    include Adamantium
+    include Adamantium::Flat
 
     # Return attribute name
     #
