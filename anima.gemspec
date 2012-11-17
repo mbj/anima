@@ -13,9 +13,10 @@ Gem::Specification.new do |s|
   s.files            = `git ls-files`.split("\n")
   s.test_files       = `git ls-files -- {spec,features}/*`.split("\n")
   s.require_paths    = %w(lib)
-  s.extra_rdoc_files = %w(README)
+  s.extra_rdoc_files = %w(README.md)
 
   s.add_dependency('backports')
-  s.add_dependency('adamantium',     '~> 0.0.1')
+  s.add_dependency('adamantium',     '~> 0.0.3')
+  s.add_dependency('equalizer',      '~> 0.0.1')
   s.add_dependency('abstract_class', '~> 0.0.1')
 end
