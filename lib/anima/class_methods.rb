@@ -28,6 +28,15 @@ module Anima
       end
     end
 
+    # Include equalizer on attributes
+    #
+    # @return [self]
+    #
+    def equalize_on_attributes
+      include Equalizer.new(*attribute_set.map(&:name))
+      self
+    end
+
     # Hook called when class is inherited
     #
     # @param [Class] descendant
