@@ -59,7 +59,7 @@ describe Anima, 'inherited attributes' do
     it 'should raise error' do
       expect { subject }.to raise_error(
         Anima::AttributeError::Missing,
-        'No value given for :title on TestClass'
+        'Missing attribute(s) :title for TestClass'
       )
     end
   end

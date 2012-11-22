@@ -52,7 +52,7 @@ describe Anima, 'simple integration' do
     it 'should raise error' do
       expect { subject }.to raise_error(
         Anima::AttributeError::Missing,
-        'No value given for :firstname on TestClass'
+        'Missing attribute(s) :firstname for TestClass'
       )
     end
   end

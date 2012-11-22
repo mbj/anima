@@ -9,40 +9,25 @@ module Anima
   class AttributeError < RuntimeError
     include AbstractClass
 
+    # Initialize object
+    #
+    # @param [Class] model
+    # @param [Enumerable<Symbol>] names
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def initialize(model, names)
+      super("#{self.class.name.split('::').last} attribute(s) #{names.inspect} for #{model.name}")
+    end
+
     # Error for unknown attributes
     class Unknown < self
-
-      # Initialize object
-      #
-      # @param [Class] model
-      # @param [Enumerable<Symbol>] names
-      #
-      # @return [undefined]
-      #
-      # @api private
-      #
-      def initialize(model, names)
-        super("Unknown attribute(s) #{names.inspect} for #{model.name}")
-      end
     end
 
     # Error for missing attributes
     class Missing < self
-
-    private
-
-      # Initialize object
-      #
-      # @param [Class] model
-      # @param [Symbol] name
-      #
-      # @return [undefined]
-      #
-      # @api private
-      #
-      def initialize(model, name)
-        super("No value given for #{name.inspect} on #{model.name}")
-      end
     end
 
   end
@@ -70,7 +55,6 @@ end
 
 require 'anima/default'
 require 'anima/attribute'
-require 'anima/attribute/set'
 require 'anima/attribute_set'
 require 'anima/class_methods'
 require 'anima/instance_methods'

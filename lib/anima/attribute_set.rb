@@ -52,7 +52,7 @@ module Anima
 
     # Add attribute to set
     #
-    # @param [Attribute]
+    # @param [Attribute] attribute
     #
     # @return [self]
     #
@@ -66,7 +66,7 @@ module Anima
 
     # Get attribute
     #
-    # @param [Symbol]
+    # @param [Symbol] name
     #
     # @return [Attribute]
     #

@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths    = %w(lib)
   s.extra_rdoc_files = %w(README.md)
 
-  s.add_dependency('backports')
+  s.add_dependency('backports',      '~> 2.6.4')
   s.add_dependency('adamantium',     '~> 0.0.3')
   s.add_dependency('equalizer',      '~> 0.0.1')
   s.add_dependency('abstract_class', '~> 0.0.1')

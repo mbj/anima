@@ -59,7 +59,7 @@ module Anima
 
     # Define reader method on scope
     #
-    # @param [Class|Module] scope
+    # @param [Class,Module] scope
     #
     # @return [self]
     #
