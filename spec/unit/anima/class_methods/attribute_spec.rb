@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Anima::ClassMethods, 'attribute' do
-  subject { object.attribute(name) }
+  subject { object.send(:attribute, name) }
 
   let(:name) { :some_method }
 
