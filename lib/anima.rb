@@ -1,4 +1,5 @@
 require 'adamantium'
+require 'equalizer'
 require 'abstract_class'
 
 # Main library namespace and mixin
