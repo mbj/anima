@@ -28,9 +28,13 @@ module Anima
       end
     end
 
+  private
+
     # Include equalizer on attributes
     #
     # @return [self]
+    #
+    # @api private
     #
     def equalize_on_attributes
       include Equalizer.new(*attribute_set.map(&:name))
@@ -41,6 +45,8 @@ module Anima
     #
     # @param [Class] descendant
     #
+    # @return [undefined]
+    #
     # @api private
     #
     def inherited(descendant)
@@ -49,8 +55,6 @@ module Anima
       attribute_set.each do |attribute|
         descendant.attribute_set.add(attribute)
       end
-
-      self
     end
 
     # Create attribute
@@ -58,6 +62,8 @@ module Anima
     # @param [Symbol] name
     #
     # @return [self]
+    #
+    # @api private
     #
     def attribute(name, klass=Attribute)
       attribute = klass.new(name)

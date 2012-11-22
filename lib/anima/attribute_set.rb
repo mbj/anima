@@ -40,6 +40,8 @@ module Anima
     #
     # @yieldparam attribute [Attribute]
     #
+    # @api private
+    #
     def each
       return to_enum unless block_given?
 

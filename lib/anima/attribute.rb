@@ -32,14 +32,16 @@ module Anima
       self
     end
 
-    # Get attribte value from object
+    # Get attribute value from object
     #
     # @param [Object] object
     #
     # @return [Object] 
     #
+    # @api private
+    #
     def get(object)
-      object.instance_variable_get(instance_variable_name)
+      object.public_send(name)
     end
 
     # Set attribute value in object

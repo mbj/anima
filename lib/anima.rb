@@ -32,21 +32,21 @@ module Anima
 
   end
 
-  # Error raised when
-
   # Undefined object (maybe used for some params)
   Undefined = Object.new.freeze
 
   # Hook called when module is included
   #
-  # @param [Class|Module] descendant
+  # @param [Class,Module] scope
+  #
+  # @return [undefined]
   #
   # @api private
   #
-  def self.included(descendant)
+  def self.included(scope)
     super
 
-    descendant.class_eval do
+    scope.class_eval do
       include InstanceMethods
       extend ClassMethods
     end
