@@ -1,6 +1,6 @@
 require 'adamantium'
 require 'equalizer'
-require 'abstract_class'
+require 'abstract_type'
 
 # Main library namespace and mixin
 module Anima
