@@ -7,7 +7,7 @@ module Anima
 
   # Abstract base class for attribute errors
   class AttributeError < RuntimeError
-    include AbstractClass
+    include AbstractType
 
     # Initialize object
     #

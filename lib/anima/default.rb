@@ -2,7 +2,7 @@ module Anima
 
   # Abstract class for attribute default
   class Default
-    include AbstractClass, Adamantium::Flat
+    include AbstractType, Adamantium::Flat
 
     # Set default value
     #
