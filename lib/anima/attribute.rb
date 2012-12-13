@@ -22,9 +22,8 @@ module Anima
     # @api private
     #
     def load(object, attributes)
-      value = attributes.fetch(name) do
-        default.set(self, object)
-        return
+      value = attributes.fetch(name) do 
+        raise AttributeError::Missing.new(object.class, name)
       end
 
       set(object, value)
@@ -92,38 +91,16 @@ module Anima
     end
     memoize :instance_variable_name
 
-    # Return default value
-    #
-    # @return [Default]
-    #
-    # @api private
-    #
-    attr_reader :default
-
   private
-
-    DEFAULT = Default::NONE
-
-    # Return default
-    #
-    # @return [Default]
-    # 
-    # @api private
-    #
-    def self.default
-      self::DEFAULT
-    end
 
     # Initialize attribute
     #
     # @param [Symbol] name
-    # @param [Default] default
     #
     # @api private
     #
-    def initialize(name, default = Undefined)
+    def initialize(name)
       @name = name
-      @default = default == Undefined ? self.class.default : default
     end
   end
 end

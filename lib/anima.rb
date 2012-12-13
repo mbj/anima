@@ -53,7 +53,6 @@ module Anima
   end
 end
 
-require 'anima/default'
 require 'anima/attribute'
 require 'anima/attribute_set'
 require 'anima/class_methods'
