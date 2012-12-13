@@ -157,7 +157,7 @@ private
   # @api private
   #
   def define_attribute_hash_reader(scope)
-    scope.define_singleton_method(:attribute_hash) do |object|
+    scope.define_singleton_method(:attributes_hash) do |object|
       anima.attributes_hash(object)
     end
   end
