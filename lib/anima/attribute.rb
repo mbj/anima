@@ -29,8 +29,6 @@ class Anima
       end
 
       set(object, value)
-
-      self
     end
 
     # Get attribute value from object
