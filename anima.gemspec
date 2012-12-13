@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/anima/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = 'anima'
-  s.version = Anima::VERSION.dup
+  s.version  = '0.0.2'
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@seonic.net'

@@ -1,6 +1,6 @@
-module Anima
+class Anima
 
-  # Attribute metadata 
+  # An attribute
   class Attribute
     include Adamantium::Flat
 
@@ -22,8 +22,10 @@ module Anima
     # @api private
     #
     def load(object, attributes)
-      value = attributes.fetch(name) do 
-        raise AttributeError::Missing.new(object.class, name)
+      attribute_name = name
+
+      value = attributes.fetch(attribute_name) do 
+        raise Error::Missing.new(object.class, attribute_name)
       end
 
       set(object, value)
@@ -58,27 +60,6 @@ module Anima
       self
     end
 
-    # Define reader method on scope
-    #
-    # @param [Class,Module] scope
-    #
-    # @return [self]
-    #
-    # @api private
-    #
-    def define_reader(scope)
-      name = self.name
-      instance_variable_name = self.instance_variable_name
-
-      scope.class_eval do
-        define_method(name) do
-          instance_variable_get(instance_variable_name)
-        end
-      end
-
-      self
-    end
-
     # Return instance variable name
     #
     # @return [Symbol]
@@ -91,7 +72,21 @@ module Anima
     end
     memoize :instance_variable_name
 
+    # Define reader
+    #
+    # @param [Class, Module] scope
+    #
+    # @return [self]
+    #
+    # @api private
+    #
+    def define_reader(scope)
+      scope.send(:attr_reader, name)
+      self
+    end
+
   private
+
 
     # Initialize attribute
     #

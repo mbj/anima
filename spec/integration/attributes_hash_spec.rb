@@ -6,14 +6,11 @@ describe Anima, 'attributes hash' do
 
   let(:class_under_test) do
     Class.new do
-      include Anima
+      include Anima.new(:firstname, :lastname)
 
       def self.name
         'TestClass'
       end
-
-      attribute :firstname
-      attribute :lastname
     end
   end
 
@@ -27,6 +24,6 @@ describe Anima, 'attributes hash' do
   let(:object) { class_under_test.new(attributes) }
 
   specify 'allows to access attributes' do
-    class_under_test.attributes(object).should eql(attributes)
+    class_under_test.attribute_hash(object).should eql(attributes)
   end
 end

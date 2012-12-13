@@ -26,7 +26,8 @@ LongParameterList:
   enabled: true
   overrides: {}
 FeatureEnvy:
-  exclude: []
+  exclude: 
+  - Anima#attributes_hash
   enabled: true
 ClassVariable:
   exclude: []

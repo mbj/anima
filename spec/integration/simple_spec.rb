@@ -5,14 +5,11 @@ describe Anima, 'simple integration' do
 
   let(:class_under_test) do
     Class.new do
-      include Anima
+      include Anima.new(:firstname, :lastname)
 
       def self.name
         'TestClass'
       end
-
-      attribute :firstname
-      attribute :lastname
     end
   end
 
@@ -39,7 +36,7 @@ describe Anima, 'simple integration' do
 
     it 'should raise error' do
       expect { subject }.to raise_error(
-        Anima::AttributeError::Unknown, 
+        Anima::Error::Unknown, 
         'Unknown attribute(s) [:extra] for TestClass'
       )
     end
@@ -51,7 +48,7 @@ describe Anima, 'simple integration' do
 
     it 'should raise error' do
       expect { subject }.to raise_error(
-        Anima::AttributeError::Missing,
+        Anima::Error::Missing,
         'Missing attribute(s) :firstname for TestClass'
       )
     end
