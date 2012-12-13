@@ -19,6 +19,8 @@ describe Anima, '#initialize_instance' do
       target.instance_variable_get(:@foo).should be(foo)
       target.instance_variable_get(:@bar).should be(bar)
     end
+
+    it_should_behave_like 'a command method'
   end
 
   context 'when extra key is missing in attribute hash' do

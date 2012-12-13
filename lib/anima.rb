@@ -4,6 +4,7 @@ require 'abstract_type'
 
 # Main library namespace and mixin
 class Anima < Module
+  include Adamantium::Flat
 
   # Return names
   #
@@ -37,6 +38,17 @@ class Anima < Module
     end
   end
 
+  # Return attribute names
+  #
+  # @return [Enumerable<Symbol>]
+  #
+  # @api private
+  #
+  def attribute_names
+    attributes.map(&:name)
+  end
+  memoize :attribute_names
+
   # Initialize instance
   #
   # @param [Object] object
@@ -48,14 +60,11 @@ class Anima < Module
   # @api private
   #
   def initialize_instance(object, attribute_hash)
-    visited = []
-
     attributes.each do |attribute|
       attribute.load(object, attribute_hash)
-      visited << attribute.name
     end
 
-    overflow = attribute_hash.keys - visited
+    overflow = attribute_hash.keys - attribute_names
 
     unless overflow.empty?
       raise Error::Unknown.new(object.class, overflow)
@@ -90,7 +99,7 @@ private
   # @api private
   #
   def define_equalizer(scope)
-    scope.send(:include, Equalizer.new(*attributes.map(&:name)))
+    scope.send(:include, Equalizer.new(*attribute_names))
   end
 
   # Define attribute readers
@@ -136,20 +145,6 @@ private
 
     scope.define_singleton_method(:attribute_hash) do |object|
       anima.attributes_hash(object)
-    end
-  end
-
-  # Define attribute readers
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api privae
-  #
-  def define_attirbute_readers(scope)
-    attributes.each do |attributes|
-      scope.send(:attr_reader, name)
     end
   end
 end
