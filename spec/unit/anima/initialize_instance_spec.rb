@@ -15,7 +15,7 @@ describe Anima, '#initialize_instance' do
 
     it 'should initialize target instance variables' do
       subject
-      target.instance_variables.should eql([:@foo, :@bar])
+      target.instance_variables.to_set.should eql([:@foo, :@bar].to_set)
       target.instance_variable_get(:@foo).should be(foo)
       target.instance_variable_get(:@bar).should be(bar)
     end
