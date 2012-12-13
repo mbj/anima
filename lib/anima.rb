@@ -1,3 +1,4 @@
+require 'backports'
 require 'adamantium'
 require 'equalizer'
 require 'abstract_type'
