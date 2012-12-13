@@ -88,7 +88,24 @@ private
     define_initializer(scope)
     define_attribute_readers(scope)
     define_attribute_hash_reader(scope)
+    define_anima_method(scope)
     define_equalizer(scope)
+  end
+
+  # Define anima method on scope
+  #
+  # @param [Class, Module] scope
+  #
+  # @return [undefined]
+  #
+  # @api private
+  #
+  def define_anima_method(scope)
+    anima = self
+
+    scope.define_singleton_method(:anima) do
+      anima
+    end
   end
 
   # Define equalizer on scope

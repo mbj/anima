@@ -1,24 +1,36 @@
 require 'spec_helper'
 
 describe Anima, '#included' do
+  let(:object) { described_class.new(:foo) }
+
   let(:target) do
+    object = self.object
     Class.new do
-      include Anima.new(:foo)
+      include object
     end
   end
 
   let(:value) { mock('Value') }
 
+  let(:instance)   { target.new(:foo => value) }
   let(:instance_b) { target.new(:foo => value) }
   let(:instance_c) { target.new(:foo => mock('Bar')) }
 
-  subject { target.new(:foo => value) }
+  context 'on instance' do
+    subject { instance }
 
-  its(:foo) { should be(value) }
+    its(:foo) { should be(value) }
 
-  it { should eql(instance_b) }
+    it { should eql(instance_b) }
+  end
 
-  it 'should define attribute hash reader' do
-    target.attribute_hash(subject).should eql(:foo => value)
+  context 'on singleton' do
+    subject { target }
+
+    it 'should define attribute hash reader' do
+      target.attribute_hash(instance).should eql(:foo => value)
+    end
+
+    its(:anima) { should be(object) }
   end
 end
