@@ -28,7 +28,7 @@ describe Anima, '#included' do
     subject { target }
 
     it 'should define attribute hash reader' do
-      target.attribute_hash(instance).should eql(:foo => value)
+      target.attributes_hash(instance).should eql(:foo => value)
     end
 
     its(:anima) { should be(object) }
