@@ -85,10 +85,10 @@ private
   # @api private
   #
   def included(scope)
+    define_anima_method(scope)
     define_initializer(scope)
     define_attribute_readers(scope)
     define_attribute_hash_reader(scope)
-    define_anima_method(scope)
     define_equalizer(scope)
   end
 
@@ -143,10 +143,8 @@ private
   # @api private
   #
   def define_initializer(scope)
-    anima = self
-
     scope.send(:define_method, :initialize) do |attributes|
-      anima.initialize_instance(self, attributes)
+      self.class.anima.initialize_instance(self, attributes)
     end
   end
 
@@ -159,8 +157,6 @@ private
   # @api private
   #
   def define_attribute_hash_reader(scope)
-    anima = self
-
     scope.define_singleton_method(:attribute_hash) do |object|
       anima.attributes_hash(object)
     end
