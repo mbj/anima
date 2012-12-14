@@ -2,7 +2,7 @@ class Anima
 
   # An attribute
   class Attribute
-    include Adamantium::Flat
+    include Adamantium::Flat, Equalizer.new(:name)
 
     # Return attribute name
     #

@@ -5,7 +5,7 @@ require 'abstract_type'
 
 # Main library namespace and mixin
 class Anima < Module
-  include Adamantium::Flat, Equalizer.new(:attributes)
+  include Adamantium::Flat #, Equalizer.new(:attributes)
 
   # Return names
   #
