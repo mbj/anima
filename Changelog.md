@@ -1,3 +1,7 @@
+# v0.0.5 2013-02-17
+
+* [changed] Update dependencies
+
 # v0.0.4 2013-01-21
 
 * [changed] Update dependencies
