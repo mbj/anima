@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'anima'
-  s.version  = '0.0.5'
+  s.version  = '0.0.6'
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@seonic.net'
