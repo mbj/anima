@@ -1,3 +1,8 @@
+# v0.0.6 2013-02-18
+
+* [add] Support for updates via Anima::Update mixin
+* [change] Update dependencies
+
 # v0.0.5 2013-02-17
 
 * [changed] Update dependencies
