@@ -165,3 +165,4 @@ end
 
 require 'anima/error'
 require 'anima/attribute'
+require 'anima/update'
