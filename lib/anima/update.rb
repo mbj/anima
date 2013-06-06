@@ -9,8 +9,8 @@ class Anima
     #     include Anima.new(:foo, :bar), Anima::Update
     #   end
     #
-    #   instance = klass.new(:foo => 1, :bar => 2)
-    #   updated = instance.update(:foo => 3)
+    #   foo = klass.new(:foo => 1, :bar => 2)
+    #   updated = foo.update(:foo => 3)
     #   updated.foo # => 3 
     #   updated.bar # => 2 
     #
@@ -25,5 +25,5 @@ class Anima
       klass.new(klass.attributes_hash(self).merge(attributes))
     end
 
-  end
-end
+  end # Update
+end # Anima
