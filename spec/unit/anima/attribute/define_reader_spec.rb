@@ -13,7 +13,7 @@ describe Anima::Attribute, '#define_reader' do
     end
   end
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   it 'should create a reader' do
     instance = target_class.new(value)

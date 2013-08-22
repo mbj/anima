@@ -5,8 +5,8 @@ describe Anima, '#initialize_instance' do
 
   let(:target) { Object.new }
 
-  let(:foo) { mock('Foo') }
-  let(:bar) { mock('Bar') }
+  let(:foo) { double('Foo') }
+  let(:bar) { double('Bar') }
 
   subject { object.initialize_instance(target, attribute_hash) }
 
@@ -24,7 +24,7 @@ describe Anima, '#initialize_instance' do
   end
 
   context 'when extra key is missing in attribute hash' do
-    let(:attribute_hash) { { :foo => foo, :bar => bar, :baz => mock('Baz') } }
+    let(:attribute_hash) { { :foo => foo, :bar => bar, :baz => double('Baz') } }
 
     it 'should raise error' do
       expect { subject }.to raise_error(Anima::Error::Unknown, Anima::Error::Unknown.new(target.class, [:baz]).message)

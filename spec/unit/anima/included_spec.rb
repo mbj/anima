@@ -10,11 +10,11 @@ describe Anima, '#included' do
     end
   end
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   let(:instance)   { target.new(:foo => value) }
   let(:instance_b) { target.new(:foo => value) }
-  let(:instance_c) { target.new(:foo => mock('Bar')) }
+  let(:instance_c) { target.new(:foo => double('Bar')) }
 
   context 'on instance' do
     subject { instance }

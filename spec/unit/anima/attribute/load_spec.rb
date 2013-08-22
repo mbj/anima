@@ -7,7 +7,7 @@ describe Anima::Attribute, '#load' do
 
   let(:target) { Object.new }
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   context 'when attribute hash contains key' do
     let(:attribute_hash) { { :foo => value } }

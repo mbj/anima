@@ -7,7 +7,7 @@ describe Anima::Attribute, '#set' do
 
   let(:target) { Object.new }
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   it_should_behave_like 'a command method'
 

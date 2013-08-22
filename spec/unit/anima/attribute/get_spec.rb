@@ -17,7 +17,7 @@ describe Anima::Attribute, '#get' do
 
   let(:target) { target_class.new(value) }
 
-  let(:value) { mock('Value') }
+  let(:value) { double('Value') }
 
   it 'should return value' do
     should be(value)

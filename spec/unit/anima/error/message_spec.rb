@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Anima::Error, '#message' do
   let(:object) { described_class.new(klass, name) }
-  
+
   subject { object.message }
 
-  let(:klass) { mock(:name => 'THE-CLASS-NAME') }
+  let(:klass) { double(:name => 'THE-CLASS-NAME') }
   let(:name)  { 'THE-ATTRIBUTE-NAME' }
 
   it 'should return the message string' do
