@@ -5,20 +5,73 @@ anima
 [![Dependency Status](https://gemnasium.com/mbj/anima.png)](https://gemnasium.com/mbj/anima)
 [![Code Climate](https://codeclimate.com/github/mbj/anima.png)](https://codeclimate.com/github/mbj/anima)
 
-Simple library to declare read only attributes on objects that are initializable via attributes hash.
+Simple library to declare read only attributes on value-objects that are initialized via attributes hash. 
 
 Installation
 ------------
 
-There is no gem release and the code is under development and unusable.
+Install the gem `anima` via your preferred method.
 
 Examples
 --------
 
-See specs.
+```
+# Definition
+class Person
+  include Anima.new(:salutation, :firstname, :lastname)
+end
+
+# Every day operation
+a = Person.new(
+  :salutation => 'Mr',
+  :firstname  => 'Markus',
+  :lastname   => 'Schirp'
+)
+
+a.salutation # => "Mr"
+a.firstname  # => "Markus"
+a.lastname   # => "Schirp"
+a.frozen?    # => true
+
+b = Person.new(
+  :salutation => 'Mr',
+  :firstname  => 'John',
+  :lastname   => 'Doe'
+)
+
+a = Person.new(
+  :salutation => 'Mr',
+  :firstname  => 'Markus',
+  :lastname   => 'Schirp'
+)
+
+a == b      # => false
+a.eql?(b)   # => false
+a.equal?(b) # => false
+
+a == c      # => true
+a.eql?(c)   # => true
+a.equal?(c) # => false
+
+# Functional updates
+class Person
+  include Anima::Update
+end
+
+d = b.update(
+  :salutation => 'Mrs', 
+  :firstname  => 'Sue',
+)
+
+# It returns copies, no inplace modification
+d.equal?(b) # => false
+
+```
 
 Credits
 -------
+
+* Markus Schirp <mbj@schirp-dso.com>
 
 Contributing
 -------------
@@ -34,7 +87,7 @@ Contributing
 License
 -------
 
-Copyright (c) 2012 Markus Schirp
+Copyright (c) 2013 Markus Schirp
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
