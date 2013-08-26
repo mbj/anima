@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email    = 'mbj@schirp-dso.com'
   s.summary  = 'Attributes for Plain Old Ruby Objects Experiment'
   s.homepage = 'http://github.com/mbj/anima'
+  s.license  = 'MIT'
 
   s.files            = `git ls-files`.split("\n")
   s.test_files       = `git ls-files -- {spec,features}/*`.split("\n")
