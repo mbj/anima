@@ -1,7 +1,6 @@
 language: ruby
 script: 'bundle exec rake ci'
 rvm:
-  - 1.9.2
   - 2.0.0
   - ruby-head
   - jruby-19mode
