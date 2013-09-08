@@ -5,7 +5,7 @@ require 'abstract_type'
 
 # Main library namespace and mixin
 class Anima < Module
-  include Adamantium::Flat #, Equalizer.new(:attributes)
+  include Adamantium::Flat, Equalizer.new(:attributes)
 
   # Return names
   #
@@ -22,7 +22,27 @@ class Anima < Module
   # @api private
   #
   def initialize(*names)
-    @attributes = names.map { |name| Attribute.new(name) }.freeze
+    @attributes = names.uniq.map { |name| Attribute.new(name) }.freeze
+  end
+
+  # Return new anima with attributes removed
+  #
+  # @return [Anima]
+  #
+  # @api private
+  #
+  def remove(*names)
+    new(attribute_names - names)
+  end
+
+  # Return new anima with attributes added
+  #
+  # @return [Anima]
+  #
+  # @api private
+  #
+  def add(*names)
+    new(attribute_names + names)
   end
 
   # Return attributes hash for instance
@@ -90,6 +110,18 @@ private
     define_attribute_readers(scope)
     define_attribute_hash_reader(scope)
     define_equalizer(scope)
+  end
+
+  # Return new instance
+  #
+  # @param [Enumerable<Symbol>] attributes
+  #
+  # @return [Anima]
+  #
+  # @api private
+  #
+  def new(attributes)
+    self.class.new(*attributes)
   end
 
   # Define anima method on scope

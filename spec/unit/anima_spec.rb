@@ -15,6 +15,43 @@ describe Anima do
     it { should eql(:foo => value) }
   end
 
+  describe '#remove' do
+    let(:object)  { described_class.new(:foo, :bar) }
+
+    context 'with single attribute' do
+      subject { object.remove(:bar) }
+      it { should eql(described_class.new(:foo)) }
+    end
+
+    context 'with multiple attributes' do
+      subject { object.remove(:foo, :bar) }
+      it { should eql(described_class.new()) }
+    end
+
+    context 'with inexisting attribute' do
+      subject { object.remove(:baz) }
+
+      it { should eql(object) }
+    end
+  end
+
+  describe '#add' do
+    context 'with single attribute' do
+      subject { object.add(:bar) }
+      it { should eql(described_class.new(:foo, :bar)) }
+    end
+
+    context 'with multiple attributes' do
+      subject { object.add(:bar, :baz) }
+      it { should eql(described_class.new(:foo, :bar, :baz)) }
+    end
+
+    context 'with duplicate attribute ' do
+      subject { object.add(:foo) }
+      it { should eql(object) }
+    end
+  end
+
   describe '#attributes' do
     subject { object.attributes }
 
