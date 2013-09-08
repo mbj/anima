@@ -4,6 +4,16 @@ class Anima
   class Attribute
     include Adamantium::Flat, Equalizer.new(:name)
 
+    # Initialize attribute
+    #
+    # @param [Symbol] name
+    #
+    # @api private
+    #
+    def initialize(name)
+      @name = name
+    end
+
     # Return attribute name
     #
     # @return [Symbol]
@@ -83,16 +93,5 @@ class Anima
       self
     end
 
-  private
-
-    # Initialize attribute
-    #
-    # @param [Symbol] name
-    #
-    # @api private
-    #
-    def initialize(name)
-      @name = name
-    end
-  end
-end
+  end # Attribute
+end # Anima
