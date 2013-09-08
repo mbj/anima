@@ -8,11 +8,11 @@ describe Anima do
 
     let(:value) { double('Value') }
 
-    let(:instance) { double(:foo => value) }
+    let(:instance) { double(foo: value) }
 
     subject { object.attributes_hash(instance) }
 
-    it { should eql(:foo => value) }
+    it { should eql(foo: value) }
   end
 
   describe '#remove' do
@@ -25,7 +25,7 @@ describe Anima do
 
     context 'with multiple attributes' do
       subject { object.remove(:foo, :bar) }
-      it { should eql(described_class.new()) }
+      it { should eql(described_class.new) }
     end
 
     context 'with inexisting attribute' do
@@ -69,9 +69,9 @@ describe Anima do
 
     let(:value) { double('Value') }
 
-    let(:instance)   { target.new(:foo => value) }
-    let(:instance_b) { target.new(:foo => value) }
-    let(:instance_c) { target.new(:foo => double('Bar')) }
+    let(:instance)   { target.new(foo: value) }
+    let(:instance_b) { target.new(foo: value) }
+    let(:instance_c) { target.new(foo: double('Bar')) }
 
     context 'on instance' do
       subject { instance }
@@ -85,7 +85,7 @@ describe Anima do
       subject { target }
 
       it 'should define attribute hash reader' do
-        target.attributes_hash(instance).should eql(:foo => value)
+        target.attributes_hash(instance).should eql(foo: value)
       end
 
       its(:anima) { should be(object) }
@@ -103,7 +103,7 @@ describe Anima do
     subject { object.initialize_instance(target, attribute_hash) }
 
     context 'when all keys are present in attribute hash' do
-      let(:attribute_hash) { { :foo => foo, :bar => bar } }
+      let(:attribute_hash) { { foo: foo, bar: bar } }
 
       it 'should initialize target instance variables' do
         subject
@@ -116,7 +116,7 @@ describe Anima do
     end
 
     context 'when extra key is missing in attribute hash' do
-      let(:attribute_hash) { { :foo => foo, :bar => bar, :baz => double('Baz') } }
+      let(:attribute_hash) { { foo: foo, bar: bar, baz: double('Baz') } }
 
       it 'should raise error' do
         expect { subject }.to raise_error(Anima::Error::Unknown, Anima::Error::Unknown.new(target.class, [:baz]).message)
@@ -124,7 +124,7 @@ describe Anima do
     end
 
     context 'when a key is missing in attribute hash' do
-      let(:attribute_hash) { { :bar => bar } }
+      let(:attribute_hash) { { bar: bar } }
 
       it 'should raise error' do
         expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target.class, :foo).message)

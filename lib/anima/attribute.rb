@@ -11,7 +11,7 @@ class Anima
     # @api private
     #
     attr_reader :name
-    
+
     # Load attribute
     #
     # @param [Object] object
@@ -24,7 +24,7 @@ class Anima
     def load(object, attributes)
       attribute_name = name
 
-      value = attributes.fetch(attribute_name) do 
+      value = attributes.fetch(attribute_name) do
         raise Error::Missing.new(object.class, attribute_name)
       end
 
@@ -35,7 +35,7 @@ class Anima
     #
     # @param [Object] object
     #
-    # @return [Object] 
+    # @return [Object]
     #
     # @api private
     #
@@ -84,7 +84,6 @@ class Anima
     end
 
   private
-
 
     # Initialize attribute
     #

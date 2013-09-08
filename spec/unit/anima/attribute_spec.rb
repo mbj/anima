@@ -18,7 +18,7 @@ describe Anima::Attribute do
 
     it 'should create a reader' do
       instance = target_class.new(value)
-      lambda { subject }.should change { instance.respond_to?(:foo) }.from(false).to(true)
+      -> { subject }.should change { instance.respond_to?(:foo) }.from(false).to(true)
     end
 
     it_should_behave_like 'a command method'
@@ -61,7 +61,7 @@ describe Anima::Attribute do
     let(:value) { double('Value') }
 
     context 'when attribute hash contains key' do
-      let(:attribute_hash) { { :foo => value } }
+      let(:attribute_hash) { { foo: value } }
 
       it 'should set value as instance variable' do
         subject

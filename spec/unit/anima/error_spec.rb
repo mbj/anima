@@ -5,7 +5,7 @@ describe Anima::Error, '#message' do
 
   subject { object.message }
 
-  let(:klass) { double(:name => 'THE-CLASS-NAME') }
+  let(:klass) { double(name: 'THE-CLASS-NAME') }
   let(:name)  { 'THE-ATTRIBUTE-NAME' }
 
   it 'should return the message string' do

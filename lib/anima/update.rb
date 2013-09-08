@@ -5,14 +5,14 @@ class Anima
     # Return updated instance
     #
     # @example
-    #   klass = Class.new do 
+    #   klass = Class.new do
     #     include Anima.new(:foo, :bar), Anima::Update
     #   end
     #
     #   foo = klass.new(:foo => 1, :bar => 2)
     #   updated = foo.update(:foo => 3)
-    #   updated.foo # => 3 
-    #   updated.bar # => 2 
+    #   updated.foo # => 3
+    #   updated.bar # => 2
     #
     # @param [Hash] attributes
     #

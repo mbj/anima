@@ -16,8 +16,8 @@ describe Anima, 'simple integration' do
   context 'when instanciated with all attributes' do
     let(:attributes) do
       {
-        :firstname => 'Markus',
-        :lastname => 'Schirp'
+        firstname: 'Markus',
+        lastname:  'Schirp'
       }
     end
 
@@ -26,17 +26,17 @@ describe Anima, 'simple integration' do
   end
 
   context 'with instanciated with extra attributes' do
-    let(:attributes) do 
+    let(:attributes) do
       {
-        :firstname => 'Markus',
-        :lastname => 'Schirp',
-        :extra => 'Foo'
+        firstname: 'Markus',
+        lastname:  'Schirp',
+        extra:     'Foo'
       }
     end
 
     it 'should raise error' do
       expect { subject }.to raise_error(
-        Anima::Error::Unknown, 
+        Anima::Error::Unknown,
         'Unknown attribute(s) [:extra] for TestClass'
       )
     end
