@@ -6,7 +6,7 @@ describe Anima::Update, '#update' do
   let(:object) { class_under_test.new(:foo => 1, :bar => 2) }
 
   let(:class_under_test) do
-    Class.new do 
+    Class.new do
       include Anima.new(:foo, :bar), Anima::Update
     end
   end
