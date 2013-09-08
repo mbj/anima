@@ -1,13 +1,10 @@
 require 'spec_helper'
 
 describe Anima do
-
   let(:object) { described_class.new(:foo) }
 
   describe '#attributes_hash' do
-
-    let(:value) { double('Value') }
-
+    let(:value)    { double('Value')    }
     let(:instance) { double(foo: value) }
 
     subject { object.attributes_hash(instance) }
@@ -20,11 +17,13 @@ describe Anima do
 
     context 'with single attribute' do
       subject { object.remove(:bar) }
+
       it { should eql(described_class.new(:foo)) }
     end
 
     context 'with multiple attributes' do
       subject { object.remove(:foo, :bar) }
+
       it { should eql(described_class.new) }
     end
 
@@ -38,16 +37,19 @@ describe Anima do
   describe '#add' do
     context 'with single attribute' do
       subject { object.add(:bar) }
+
       it { should eql(described_class.new(:foo, :bar)) }
     end
 
     context 'with multiple attributes' do
       subject { object.add(:bar, :baz) }
+
       it { should eql(described_class.new(:foo, :bar, :baz)) }
     end
 
     context 'with duplicate attribute ' do
       subject { object.add(:foo) }
+
       it { should eql(object) }
     end
   end
@@ -67,10 +69,9 @@ describe Anima do
       end
     end
 
-    let(:value) { double('Value') }
-
-    let(:instance)   { target.new(foo: value) }
-    let(:instance_b) { target.new(foo: value) }
+    let(:value)      { double('Value')                }
+    let(:instance)   { target.new(foo: value)         }
+    let(:instance_b) { target.new(foo: value)         }
     let(:instance_c) { target.new(foo: double('Bar')) }
 
     context 'on instance' do
@@ -94,9 +95,7 @@ describe Anima do
 
   describe '#initialize_instance' do
     let(:object) { Anima.new(:foo, :bar) }
-
     let(:target) { Object.new }
-
     let(:foo) { double('Foo') }
     let(:bar) { double('Bar') }
 
