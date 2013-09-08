@@ -29,7 +29,11 @@ class Anima < Module
   #
   # @return [Anima]
   #
-  # @api private
+  # @example
+  #   anima = Anima.new(:foo)
+  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
+  #
+  # @api public
   #
   def remove(*names)
     new(attribute_names - names)
@@ -38,6 +42,10 @@ class Anima < Module
   # Return new anima with attributes added
   #
   # @return [Anima]
+  #
+  # @example
+  #   anima = Anima.new(:foo, :bar)
+  #   anima.remove(:bar) # equals Anima.new(:foo)
   #
   # @api private
   #
