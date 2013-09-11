@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@schirp-dso.com'
-  s.summary  = 'Attributes for Plain Old Ruby Objects Experiment'
+  s.summary  = 'Initialize object attributes via attributes hash'
   s.homepage = 'http://github.com/mbj/anima'
   s.license  = 'MIT'
 
