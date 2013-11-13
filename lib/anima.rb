@@ -172,7 +172,8 @@ private
   # @api private
   #
   def define_equalizer(scope)
-    scope.send(:include, Equalizer.new(*attribute_names))
+    equalizer = Equalizer.new(*attribute_names)
+    scope.class_eval { include equalizer }
   end
 
   # Define attribute readers
