@@ -16,7 +16,7 @@ class Anima < Module
   # @api private
   def self.constructor
     Module.new do
-      define_method :initialize do |attributes|
+      def initialize(attributes)
         self.class.anima.initialize_instance(self, attributes)
       end
     end
