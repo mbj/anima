@@ -114,7 +114,7 @@ describe Anima do
       it_should_behave_like 'a command method'
     end
 
-    context 'when extra key is missing in attribute hash' do
+    context 'when an extra key is present in attribute hash' do
       let(:attribute_hash) { { foo: foo, bar: bar, baz: double('Baz') } }
 
       it 'should raise error' do
