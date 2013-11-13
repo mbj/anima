@@ -6,6 +6,22 @@ require 'abstract_type'
 class Anima < Module
   include Adamantium::Flat, Equalizer.new(:attributes)
 
+  # A module definining an #initialize method suitable for anima classes
+  #
+  # Including #initialize via a module supports overwriting this default
+  # constructor provided by anima, by allowing to call #super
+  #
+  # @return [Module]
+  #
+  # @api private
+  def self.constructor
+    Module.new do
+      define_method :initialize do |attributes|
+        self.class.anima.initialize_instance(self, attributes)
+      end
+    end
+  end
+
   # Return names
   #
   # @return [AttriuteSet]
@@ -182,9 +198,8 @@ private
   # @api private
   #
   def define_initializer(scope)
-    scope.send(:define_method, :initialize) do |attributes|
-      self.class.anima.initialize_instance(self, attributes)
-    end
+    constructor = self.class.constructor
+    scope.class_eval { include constructor }
   end
 
   # Define attribute hash reader

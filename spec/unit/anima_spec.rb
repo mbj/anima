@@ -130,4 +130,19 @@ describe Anima do
       end
     end
   end
+
+  describe 'using super in initialize' do
+    subject { klass.new }
+
+    let(:klass) do
+       Class.new do
+         include Anima.new(:foo)
+         def initialize(attributes = {foo: :bar})
+           super
+         end
+       end
+    end
+
+    its(:foo) { should eql(:bar) }
+  end
 end
