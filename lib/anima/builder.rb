@@ -80,7 +80,7 @@ class Anima
 
     private
 
-    # Define equalizer on scope
+    # Define equalizer
     #
     # @return [undefined]
     #
@@ -91,7 +91,7 @@ class Anima
       end
     end
 
-    # Define anima method on scope
+    # Define anima method
     #
     # @return [undefined]
     #
