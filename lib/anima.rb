@@ -116,17 +116,19 @@ class Anima < Module
     attributes.each do |attribute|
       attribute.load(object, attribute_hash)
     end
+    assert_known_attributes(object, attribute_hash)
+    self
+  end
 
+private
+
+  def assert_known_attributes(object, attribute_hash)
     overflow = attribute_hash.keys - attribute_names
 
     if overflow.any?
       raise Error::Unknown.new(object.class, overflow)
     end
-
-    self
   end
-
-private
 
   # Hook called when module is included
   #
