@@ -119,7 +119,7 @@ class Anima < Module
 
     overflow = attribute_hash.keys - attribute_names
 
-    unless overflow.empty?
+    if overflow.any?
       raise Error::Unknown.new(object.class, overflow)
     end
 
