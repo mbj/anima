@@ -8,7 +8,7 @@ describe Anima::Error, '#message' do
   let(:error) do
     Class.new(described_class) do
       def self.name
-        'TestError'
+        'Test::Error'
       end
     end
   end
@@ -19,7 +19,7 @@ describe Anima::Error, '#message' do
   let(:name)     { 'foo' }
 
   it 'should return the message string' do
-    should eql('TestError attribute(s) "foo" for Object')
+    should eql('Error attribute(s) "foo" for Object')
   end
 
   it_should_behave_like 'an idempotent method'
