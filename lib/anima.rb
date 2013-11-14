@@ -6,21 +6,30 @@ require 'abstract_type'
 class Anima < Module
   include Adamantium::Flat, Equalizer.new(:attributes)
 
-  # A module definining an #initialize method suitable for anima classes
-  #
-  # Including #initialize via a module supports overwriting this default
-  # constructor provided by anima, by allowing to call #super
-  #
-  # @return [Module]
-  #
-  # @api private
-  def self.constructor
-    Module.new do
-      def initialize(attributes)
-        self.class.anima.initialize_instance(self, attributes)
-      end
+  # Instance methods available on anima infected objects
+  module InstanceMethods
+
+    # Initialize an anima infected object
+    #
+    # @param [#to_h] attributes
+    #   a hash that matches anima defined attributes
+    #
+    # @return [undefined]
+    #
+    # @api public
+    def initialize(attributes)
+      self.class.anima.initialize_instance(self, attributes)
     end
-  end
+
+    # Return a hash representation of an anima infected object
+    #
+    # @return [Hash]
+    #
+    # @api public
+    def to_h
+      self.class.attributes_hash(self)
+    end
+  end # InstanceMethods
 
   # Return names
   #
@@ -129,11 +138,12 @@ private
   #
   def included(scope)
     define_anima_method(scope)
-    define_initializer(scope)
     define_attribute_readers(scope)
     define_attribute_hash_reader(scope)
     define_equalizer(scope)
-    define_to_h(scope)
+    scope.class_eval do
+      include InstanceMethods
+    end
   end
 
   # Return new instance
@@ -188,34 +198,6 @@ private
   def define_attribute_readers(scope)
     attributes.each do |attribute|
       attribute.define_reader(scope)
-    end
-  end
-
-  # Define initializer
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  #
-  def define_initializer(scope)
-    constructor = self.class.constructor
-    scope.class_eval { include constructor }
-  end
-
-  # Define the #to_h method on scope
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  def define_to_h(scope)
-    scope.class_eval do
-      def to_h
-        self.class.attributes_hash(self)
-      end
     end
   end
 
