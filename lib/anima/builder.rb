@@ -25,7 +25,7 @@ class Anima
       #
       # @api public
       def to_h
-        self.class.attributes_hash(self)
+        self.class.anima.attributes_hash(self)
       end
     end # Methods
 
