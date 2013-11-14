@@ -108,7 +108,7 @@ class Anima
     # @api private
     def define_attribute_readers
       descendant_exec(@names) do |names|
-        names.each { |name| attr_reader(name) }
+        attr_reader(*names)
       end
     end
 
