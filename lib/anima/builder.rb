@@ -72,7 +72,7 @@ class Anima
       define_equalizer
       define_anima_method
       define_attribute_readers
-      @descendant.class_eval do
+      descendant_exec do
         include Methods
       end
     end
