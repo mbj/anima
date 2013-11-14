@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Anima do
@@ -135,12 +137,12 @@ describe Anima do
     subject { klass.new }
 
     let(:klass) do
-       Class.new do
-         include Anima.new(:foo)
-         def initialize(attributes = {foo: :bar})
-           super
-         end
-       end
+      Class.new do
+        include Anima.new(:foo)
+        def initialize(attributes = { foo: :bar })
+          super
+        end
+      end
     end
 
     its(:foo) { should eql(:bar) }

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'adamantium'
 require 'equalizer'
 require 'abstract_type'
@@ -126,7 +128,7 @@ class Anima < Module
     overflow = attribute_hash.keys - attribute_names
 
     if overflow.any?
-      raise Error::Unknown.new(object, overflow)
+      fail Error::Unknown.new(object, overflow)
     end
   end
 

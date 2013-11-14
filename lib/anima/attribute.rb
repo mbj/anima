@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Anima
 
   # An attribute
@@ -35,7 +37,7 @@ class Anima
       attribute_name = name
 
       value = attributes.fetch(attribute_name) do
-        raise Error::Missing.new(object, attribute_name)
+        fail Error::Missing.new(object, attribute_name)
       end
 
       set(object, value)
