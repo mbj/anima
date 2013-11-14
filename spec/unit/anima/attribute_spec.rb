@@ -26,14 +26,6 @@ describe Anima::Attribute do
     end
   end
 
-  describe '#instance_variable_name' do
-    subject { Anima::Attribute.new(:foo).instance_variable_name }
-
-    it { should be(:@foo) }
-
-    it_should_behave_like 'an idempotent method'
-  end
-
   describe '#load' do
     subject { object.load(target, attribute_hash) }
 
