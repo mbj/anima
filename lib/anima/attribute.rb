@@ -80,18 +80,5 @@ class Anima
     end
     memoize :instance_variable_name
 
-    # Define reader
-    #
-    # @param [Class, Module] scope
-    #
-    # @return [self]
-    #
-    # @api private
-    #
-    def define_reader(scope)
-      scope.send(:attr_reader, name)
-      self
-    end
-
   end # Attribute
 end # Anima

@@ -6,31 +6,6 @@ require 'abstract_type'
 class Anima < Module
   include Adamantium::Flat, Equalizer.new(:attributes)
 
-  # Instance methods available on anima infected objects
-  module InstanceMethods
-
-    # Initialize an anima infected object
-    #
-    # @param [#to_h] attributes
-    #   a hash that matches anima defined attributes
-    #
-    # @return [undefined]
-    #
-    # @api public
-    def initialize(attributes)
-      self.class.anima.initialize_instance(self, attributes)
-    end
-
-    # Return a hash representation of an anima infected object
-    #
-    # @return [Hash]
-    #
-    # @api public
-    def to_h
-      self.class.attributes_hash(self)
-    end
-  end # InstanceMethods
-
   # Return names
   #
   # @return [AttriuteSet]
@@ -120,15 +95,7 @@ class Anima < Module
     self
   end
 
-private
-
-  def assert_known_attributes(object, attribute_hash)
-    overflow = attribute_hash.keys - attribute_names
-
-    if overflow.any?
-      raise Error::Unknown.new(object.class, overflow)
-    end
-  end
+  private
 
   # Hook called when module is included
   #
@@ -138,13 +105,28 @@ private
   #
   # @api private
   #
-  def included(scope)
-    define_anima_method(scope)
-    define_attribute_readers(scope)
-    define_attribute_hash_reader(scope)
-    define_equalizer(scope)
-    scope.class_eval do
-      include InstanceMethods
+  def included(descendant)
+    Builder.call(self, descendant)
+  end
+
+  # Fail unless keys in +attribute_hash+ matches #attribute_names
+  #
+  # @param [Object] object
+  #   the object being initialized
+  #
+  # @param [Hash] attribute_hash
+  #   the attributes to initialize +object+ with
+  #
+  # @return [undefined]
+  #
+  # @raise [Error::Unknown]
+  #
+  # @api private
+  def assert_known_attributes(object, attribute_hash)
+    overflow = attribute_hash.keys - attribute_names
+
+    if overflow.any?
+      raise Error::Unknown.new(object.class, overflow)
     end
   end
 
@@ -160,64 +142,9 @@ private
     self.class.new(*attributes)
   end
 
-  # Define anima method on scope
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  #
-  def define_anima_method(scope)
-    anima = self
+end # Anima
 
-    scope.define_singleton_method(:anima) do
-      anima
-    end
-  end
-
-  # Define equalizer on scope
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  #
-  def define_equalizer(scope)
-    equalizer = Equalizer.new(*attribute_names)
-    scope.class_eval { include equalizer }
-  end
-
-  # Define attribute readers
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  #
-  def define_attribute_readers(scope)
-    attributes.each do |attribute|
-      attribute.define_reader(scope)
-    end
-  end
-
-  # Define attribute hash reader
-  #
-  # @param [Class, Module] scope
-  #
-  # @return [undefined]
-  #
-  # @api private
-  #
-  def define_attribute_hash_reader(scope)
-    scope.define_singleton_method(:attributes_hash) do |object|
-      anima.attributes_hash(object)
-    end
-  end
-end
-
+require 'anima/builder'
 require 'anima/error'
 require 'anima/attribute'
 require 'anima/update'
