@@ -5,7 +5,7 @@ anima
 [![Dependency Status](https://gemnasium.com/mbj/anima.png)](https://gemnasium.com/mbj/anima)
 [![Code Climate](https://codeclimate.com/github/mbj/anima.png)](https://codeclimate.com/github/mbj/anima)
 
-Simple library to declare read only attributes on value-objects that are initialized via attributes hash. 
+Simple library to declare read only attributes on value-objects that are initialized via attributes hash.
 
 Installation
 ------------
@@ -59,13 +59,15 @@ class Person
 end
 
 d = b.update(
-  :salutation => 'Mrs', 
+  :salutation => 'Mrs',
   :firstname  => 'Sue',
 )
 
 # It returns copies, no inplace modification
 d.equal?(b) # => false
 
+# Hash representation
+d.to_h # => { :salutation => 'Mrs', :firstname => 'Sue' }
 ```
 
 Credits
