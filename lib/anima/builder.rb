@@ -86,8 +86,9 @@ class Anima
     #
     # @api private
     def define_equalizer
-      equalizer = Equalizer.new(*@names)
-      descendant_eval { include equalizer }
+      descendant_exec(@names) do |names|
+        include Equalizer.new(*names)
+      end
     end
 
     # Define anima method on scope
@@ -108,8 +109,7 @@ class Anima
     #
     # @api private
     def define_attribute_readers
-      names = @names
-      descendant_eval do
+      descendant_exec(@names) do |names|
         names.each { |name| attr_reader(name) }
       end
     end
@@ -125,7 +125,10 @@ class Anima
       end
     end
 
-    # Deduplicate class_eval inside descendant's scope
+    # Deduplicate instance_exec inside descendant's scope
+    #
+    # @param [*] *args
+    #   arguments to pass to instance_exec
     #
     # @param [Proc] &block
     #   the block to eval
@@ -133,8 +136,8 @@ class Anima
     # @return [undefined]
     #
     # @api private
-    def descendant_eval(&block)
-      @descendant.class_eval(&block)
+    def descendant_exec(*args, &block)
+      @descendant.instance_exec(*args, &block)
     end
   end # Builder
 end # Anima
