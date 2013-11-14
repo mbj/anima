@@ -35,7 +35,7 @@ class Anima
       attribute_name = name
 
       value = attributes.fetch(attribute_name) do
-        raise Error::Missing.new(object.class, attribute_name)
+        raise Error::Missing.new(object, attribute_name)
       end
 
       set(object, value)

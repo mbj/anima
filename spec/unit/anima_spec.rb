@@ -118,7 +118,7 @@ describe Anima do
       let(:attribute_hash) { { foo: foo, bar: bar, baz: double('Baz') } }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Unknown, Anima::Error::Unknown.new(target.class, [:baz]).message)
+        expect { subject }.to raise_error(Anima::Error::Unknown, Anima::Error::Unknown.new(target, [:baz]).message)
       end
     end
 
@@ -126,7 +126,7 @@ describe Anima do
       let(:attribute_hash) { { bar: bar } }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target.class, :foo).message)
+        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target, :foo).message)
       end
     end
   end

@@ -55,7 +55,7 @@ describe Anima::Attribute do
       let(:attribute_hash) { {} }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target.class, :foo).message)
+        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target, :foo).message)
       end
     end
   end

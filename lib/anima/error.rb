@@ -17,15 +17,15 @@ class Anima
 
     # Initialize object
     #
-    # @param [Class] model
+    # @param [Object] object
     # @param [Enumerable<Symbol>] names
     #
     # @return [undefined]
     #
     # @api private
     #
-    def initialize(model, names)
-      super("#{name} attribute(s) #{names.inspect} for #{model.name}")
+    def initialize(object, names)
+      super("#{name} attribute(s) #{names.inspect} for #{object.class.name}")
     end
 
     private
