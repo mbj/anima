@@ -96,9 +96,8 @@ class Anima
     #
     # @api private
     def define_anima_method
-      anima = @anima
-      @descendant.define_singleton_method(:anima) do
-        anima
+      descendant_exec(@anima) do |anima|
+        define_singleton_method(:anima) { anima }
       end
     end
 
