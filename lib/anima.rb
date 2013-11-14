@@ -23,7 +23,7 @@ class Anima < Module
   # @api private
   #
   def initialize(*names)
-    @attributes = names.uniq.map { |name| Attribute.new(name) }.freeze
+    @attributes = names.uniq.map(&Attribute.method(:new)).freeze
   end
 
   # Return new anima with attributes added
