@@ -13,7 +13,7 @@ class Anima
     # @api private
     #
     def initialize(name)
-      @name = name
+      @name, @instance_variable_name = name, :"@#{name}"
     end
 
     # Return attribute name
@@ -23,6 +23,14 @@ class Anima
     # @api private
     #
     attr_reader :name
+
+    # Return instance variable name
+    #
+    # @return [Symbol]
+    #   returns @ prefixed name
+    #
+    # @api private
+    attr_reader :instance_variable_name
 
     # Load attribute
     #
@@ -67,18 +75,6 @@ class Anima
 
       self
     end
-
-    # Return instance variable name
-    #
-    # @return [Symbol]
-    #   returns @ prefixed name
-    #
-    # @api private
-    #
-    def instance_variable_name
-      :"@#{name}"
-    end
-    memoize :instance_variable_name
 
   end # Attribute
 end # Anima
