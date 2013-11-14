@@ -9,7 +9,7 @@ end
 describe Anima, 'simple integration' do
   subject { TestClass.new(attributes) }
 
-  context 'when instanciated with all attributes' do
+  context 'when instantiated with all attributes' do
     let(:attributes) do
       {
         firstname: 'Markus',
@@ -21,7 +21,7 @@ describe Anima, 'simple integration' do
     its(:lastname) { should eql('Schirp') }
   end
 
-  context 'with instanciated with extra attributes' do
+  context 'with instantiated with extra attributes' do
     let(:attributes) do
       {
         firstname: 'Markus',
@@ -38,7 +38,7 @@ describe Anima, 'simple integration' do
     end
   end
 
-  context 'when instanciated with missing attribute' do
+  context 'when instantiated with missing attributes' do
 
     let(:attributes) { {} }
 
