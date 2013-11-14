@@ -2,18 +2,12 @@
 
 require 'spec_helper'
 
+class TestClass
+  include Anima.new(:firstname, :lastname)
+end
+
 describe Anima, 'simple integration' do
-  subject { class_under_test.new(attributes) }
-
-  let(:class_under_test) do
-    Class.new do
-      include Anima.new(:firstname, :lastname)
-
-      def self.name
-        'TestClass'
-      end
-    end
-  end
+  subject { TestClass.new(attributes) }
 
   context 'when instanciated with all attributes' do
     let(:attributes) do

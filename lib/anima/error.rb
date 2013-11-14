@@ -27,7 +27,7 @@ class Anima
     # @api private
     #
     def initialize(object, names)
-      super("#{name} attribute(s) #{names.inspect} for #{object.class.name}")
+      super("#{name} attribute(s) #{names.inspect} for #{object.class}")
     end
 
     private
