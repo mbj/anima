@@ -23,8 +23,7 @@ class Anima
     # @api private
     #
     def update(attributes)
-      klass = self.class
-      klass.new(klass.attributes_hash(self).merge(attributes))
+      self.class.new(to_h.update(attributes))
     end
 
   end # Update

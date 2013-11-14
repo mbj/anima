@@ -72,7 +72,6 @@ class Anima
       define_equalizer
       define_anima_method
       define_attribute_readers
-      define_attribute_hash_reader
       @descendant.class_eval do
         include Methods
       end
@@ -111,17 +110,6 @@ class Anima
     def define_attribute_readers
       descendant_exec(@names) do |names|
         names.each { |name| attr_reader(name) }
-      end
-    end
-
-    # Define attribute hash reader
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def define_attribute_hash_reader
-      @descendant.define_singleton_method(:attributes_hash) do |object|
-        anima.attributes_hash(object)
       end
     end
 

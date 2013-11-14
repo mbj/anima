@@ -88,7 +88,7 @@ describe Anima do
       subject { target }
 
       it 'should define attribute hash reader' do
-        target.attributes_hash(instance).should eql(foo: value)
+        instance.to_h.should eql(foo: value)
       end
 
       its(:anima) { should be(object) }
