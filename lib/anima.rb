@@ -24,20 +24,6 @@ class Anima < Module
     @attributes = names.uniq.map { |name| Attribute.new(name) }.freeze
   end
 
-  # Return new anima with attributes removed
-  #
-  # @return [Anima]
-  #
-  # @example
-  #   anima = Anima.new(:foo)
-  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
-  #
-  # @api public
-  #
-  def remove(*names)
-    new(attribute_names - names)
-  end
-
   # Return new anima with attributes added
   #
   # @return [Anima]
@@ -50,6 +36,20 @@ class Anima < Module
   #
   def add(*names)
     new(attribute_names + names)
+  end
+
+  # Return new anima with attributes removed
+  #
+  # @return [Anima]
+  #
+  # @example
+  #   anima = Anima.new(:foo)
+  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
+  #
+  # @api public
+  #
+  def remove(*names)
+    new(attribute_names - names)
   end
 
   # Return attributes hash for instance
