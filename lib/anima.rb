@@ -88,10 +88,10 @@ class Anima < Module
   # @api private
   #
   def initialize_instance(object, attribute_hash)
+    assert_known_attributes(object, attribute_hash)
     attributes.each do |attribute|
       attribute.load(object, attribute_hash)
     end
-    assert_known_attributes(object, attribute_hash)
     self
   end
 
