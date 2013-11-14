@@ -8,7 +8,7 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 TooManyMethods:
-  max_methods: 14
+  max_methods: 16
   exclude: []
   enabled: true
   max_instance_variables: 2
@@ -28,6 +28,7 @@ LongParameterList:
 FeatureEnvy:
   exclude:
   - Anima#attributes_hash
+  - Anima#define_to_h
   enabled: true
 ClassVariable:
   exclude: []
@@ -63,7 +64,8 @@ DuplicateMethodCall:
   max_calls: 1
 UtilityFunction:
   max_helper_calls: 1
-  exclude: []
+  exclude:
+  - Anima#define_to_h
   enabled: true
 Attribute:
   exclude: []

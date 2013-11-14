@@ -133,6 +133,7 @@ private
     define_attribute_readers(scope)
     define_attribute_hash_reader(scope)
     define_equalizer(scope)
+    define_to_h(scope)
   end
 
   # Return new instance
@@ -201,6 +202,21 @@ private
   def define_initializer(scope)
     constructor = self.class.constructor
     scope.class_eval { include constructor }
+  end
+
+  # Define the #to_h method on scope
+  #
+  # @param [Class, Module] scope
+  #
+  # @return [undefined]
+  #
+  # @api private
+  def define_to_h(scope)
+    scope.class_eval do
+      def to_h
+        self.class.attributes_hash(self)
+      end
+    end
   end
 
   # Define attribute hash reader

@@ -145,4 +145,18 @@ describe Anima do
 
     its(:foo) { should eql(:bar) }
   end
+
+  describe '#to_h on an anima infected instance' do
+    subject { instance.to_h }
+
+    let(:instance) { klass.new(params) }
+    let(:params)   { Hash[foo: :bar] }
+    let(:klass) do
+      Class.new do
+        include Anima.new(:foo)
+      end
+    end
+
+    it { should eql(params) }
+  end
 end
