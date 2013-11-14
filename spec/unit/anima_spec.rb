@@ -82,6 +82,7 @@ describe Anima do
       its(:foo) { should be(value) }
 
       it { should eql(instance_b) }
+      it { should_not eql(instance_c) }
     end
 
     context 'on singleton' do
