@@ -10,7 +10,7 @@ class Anima < Module
 
   # Return names
   #
-  # @return [AttriuteSet]
+  # @return [AttributeSet]
   #
   # @api private
   #
@@ -32,7 +32,7 @@ class Anima < Module
   #
   # @example
   #   anima = Anima.new(:foo, :bar)
-  #   anima.remove(:bar) # equals Anima.new(:foo)
+  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
   #
   # @api private
   #
@@ -46,7 +46,7 @@ class Anima < Module
   #
   # @example
   #   anima = Anima.new(:foo)
-  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
+  #   anima.remove(:bar) # equals Anima.new(:foo)
   #
   # @api public
   #
