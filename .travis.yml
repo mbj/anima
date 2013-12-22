@@ -18,6 +18,8 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
   allow_failures:
     - rvm: 2.0.0
+    - rvm: 2.1.0-rc1
+    - rvm: ruby-head
   fast_finish: true
 notifications:
   irc:
