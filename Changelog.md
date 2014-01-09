@@ -1,3 +1,11 @@
+# v0.1.1 2014-xx-xx
+
+* [add] #to_h for anima infected modules
+
+# v0.1.0 2013-xx-xx
+
+* [change] Update dependencies
+
 # v0.0.6 2013-02-18
 
 * [add] Support for updates via Anima::Update mixin
