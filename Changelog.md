@@ -1,8 +1,8 @@
-# v0.1.1 2014-xx-xx
+# v0.1.1 2013-09-08
 
-* [add] #to_h for anima infected modules
+* [change] Refactor internals.
 
-# v0.1.0 2013-xx-xx
+# v0.1.0 2013-09-08
 
 * [change] Update dependencies
 
