@@ -1,3 +1,10 @@
+# v0.2.0 2014-01-13
+
+Breaking changes:
+
+* Remove AnimaInfectedClass.attributes_hash(instance)
+* Replace with AnimaInfectedClass#to_h
+
 # v0.1.1 2013-09-08
 
 * [change] Refactor internals.
