@@ -15,7 +15,9 @@ Install the gem `anima` via your preferred method.
 Examples
 --------
 
-```
+```ruby
+require 'anima'
+
 # Definition
 class Person
   include Anima.new(:salutation, :firstname, :lastname)
@@ -28,10 +30,11 @@ a = Person.new(
   :lastname   => 'Schirp'
 )
 
+# Returns expected values
 a.salutation # => "Mr"
 a.firstname  # => "Markus"
 a.lastname   # => "Schirp"
-a.frozen?    # => true
+a.frozen?    # => false
 
 b = Person.new(
   :salutation => 'Mr',
@@ -39,21 +42,23 @@ b = Person.new(
   :lastname   => 'Doe'
 )
 
-a = Person.new(
+c = Person.new(
   :salutation => 'Mr',
   :firstname  => 'Markus',
   :lastname   => 'Schirp'
 )
 
+# Equality works predictably
 a == b      # => false
 a.eql?(b)   # => false
 a.equal?(b) # => false
 
+# Matches attributes
 a == c      # => true
 a.eql?(c)   # => true
 a.equal?(c) # => false
 
-# Functional updates
+# Functional-style updates
 class Person
   include Anima::Update
 end
