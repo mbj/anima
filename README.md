@@ -15,7 +15,7 @@ Install the gem `anima` via your preferred method.
 Examples
 --------
 
-```
+```ruby
 # Definition
 class Person
   include Anima.new(:salutation, :firstname, :lastname)
