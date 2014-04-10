@@ -1,3 +1,9 @@
+# v0.2.1 2014-04-10
+
+Changes:
+
+* Require ruby version >= 1.9.3 in gemspec.
+
 # v0.2.0 2014-01-13
 
 Breaking changes:
