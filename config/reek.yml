@@ -49,8 +49,7 @@ NestedIterators:
   ignore_iterators: []
   exclude:
   - Anima::Attribute#define_reader # 2 levels
-  - Anima::Builder#define_anima_method # 2 levels
-  - Anima::Builder#define_attribute_readers # 2 levels
+  - Anima#included # 2 levels
   enabled: true
   max_allowed_nesting: 1
 TooManyStatements:
