@@ -134,21 +134,19 @@ class Anima < Module
   def included(descendant)
     names = attribute_names
 
-    # Define equalizer
-    descendant.instance_exec(names) do |names|
+    descendant.instance_exec(self,names) do |anima,names|
+      # Define anima method
+      define_singleton_method(:anima) { anima }
+
+      # Define instance methods
+      include InstanceMethods
+
+      # Define attribute readers
+      attr_reader(*names)
+
+      # Define equalizer
       include Equalizer.new(*names)
     end
-
-    # Define anima method
-    descendant.instance_exec(self) do |anima|
-      define_singleton_method(:anima) { anima }
-    end
-
-    # Define attribute readers
-    descendant.instance_exec(names) { |names| attr_reader(*names) }
-
-    # Define instance methods
-    descendant.instance_exec { include InstanceMethods }
   end
 
   # Fail unless keys in +attribute_hash+ matches #attribute_names
