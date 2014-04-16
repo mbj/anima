@@ -97,9 +97,33 @@ class Anima < Module
     self
   end
 
+  # Static instance methods for anima infected classes
+  module InstanceMethods
+    # Initialize an anima infected object
+    #
+    # @param [#to_h] attributes
+    #   a hash that matches anima defined attributes
+    #
+    # @return [undefined]
+    #
+    # @api public
+    def initialize(attributes)
+      self.class.anima.initialize_instance(self, attributes)
+    end
+
+    # Return a hash representation of an anima infected object
+    #
+    # @return [Hash]
+    #
+    # @api public
+    def to_h
+      self.class.anima.attributes_hash(self)
+    end
+  end # InstanceMethods
+
   private
 
-  # Hook called when module is included
+  # Infect the instance with anima
   #
   # @param [Class, Module] scope
   #
@@ -108,7 +132,19 @@ class Anima < Module
   # @api private
   #
   def included(descendant)
-    Builder.call(self, descendant)
+    descendant.instance_exec(self, attribute_names) do |anima, names|
+      # Define anima method
+      define_singleton_method(:anima) { anima }
+
+      # Define instance methods
+      include InstanceMethods
+
+      # Define attribute readers
+      attr_reader(*names)
+
+      # Define equalizer
+      include Equalizer.new(*names)
+    end
   end
 
   # Fail unless keys in +attribute_hash+ matches #attribute_names
@@ -146,7 +182,6 @@ class Anima < Module
 
 end # Anima
 
-require 'anima/builder'
 require 'anima/error'
 require 'anima/attribute'
 require 'anima/update'
