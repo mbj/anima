@@ -132,9 +132,7 @@ class Anima < Module
   # @api private
   #
   def included(descendant)
-    names = attribute_names
-
-    descendant.instance_exec(self,names) do |anima,names|
+    descendant.instance_exec(self, attribute_names) do |anima, names|
       # Define anima method
       define_singleton_method(:anima) { anima }
 
