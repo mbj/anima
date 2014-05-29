@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Anima
-  # Module for mixin in update functionallity to anima infected clases
+  # Module for mixin in update functionality to anima infected clases
   module Update
 
     # Return updated instance
