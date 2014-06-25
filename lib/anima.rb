@@ -163,9 +163,7 @@ class Anima < Module
   def assert_known_attributes(object, attribute_hash)
     overflow = attribute_hash.keys - attribute_names
 
-    if overflow.any?
-      fail Error::Unknown.new(object, overflow)
-    end
+    fail Error::Unknown.new(object, overflow) if overflow.any?
   end
 
   # Return new instance
