@@ -24,6 +24,14 @@ class Anima
     #
     attr_reader :name
 
+    # Return instance variable name
+    #
+    # @return [Symbol]
+    #
+    # @api private
+    #
+    attr_reader :instance_variable_name
+
     # Load attribute
     #
     # @param [Object] object
@@ -63,7 +71,7 @@ class Anima
     # @api private
     #
     def set(object, value)
-      object.instance_variable_set(@instance_variable_name, value)
+      object.instance_variable_set(instance_variable_name, value)
 
       self
     end
