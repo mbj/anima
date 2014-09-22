@@ -26,9 +26,9 @@ end
 
 # Every day operation
 a = Person.new(
-  :salutation => 'Mr',
-  :firstname  => 'Markus',
-  :lastname   => 'Schirp'
+  salutation: 'Mr',
+  firstname:  'Markus',
+  lastname:   'Schirp'
 )
 
 # Returns expected values
@@ -38,23 +38,22 @@ a.lastname   # => "Schirp"
 a.frozen?    # => false
 
 b = Person.new(
-  :salutation => 'Mr',
-  :firstname  => 'John',
-  :lastname   => 'Doe'
+  salutation: 'Mr',
+  firstname:  'John',
+  lastname:   'Doe'
 )
 
 c = Person.new(
-  :salutation => 'Mr',
-  :firstname  => 'Markus',
-  :lastname   => 'Schirp'
+  salutation: 'Mr',
+  firstname:  'Markus',
+  lastname:   'Schirp'
 )
 
-# Equality works predictably
+# Equality based on attributes
 a == b      # => false
 a.eql?(b)   # => false
 a.equal?(b) # => false
 
-# Matches attributes
 a == c      # => true
 a.eql?(c)   # => true
 a.equal?(c) # => false
@@ -65,15 +64,15 @@ class Person
 end
 
 d = b.update(
-  :salutation => 'Mrs',
-  :firstname  => 'Sue',
+  salutation: 'Mrs',
+  firstname:  'Sue',
 )
 
 # It returns copies, no inplace modification
 d.equal?(b) # => false
 
 # Hash representation
-d.to_h # => { :salutation => 'Mrs', :firstname => 'Sue' }
+d.to_h # => { salutation: 'Mrs', firstname: 'Sue', lastname: 'Doe' }
 ```
 
 Credits
