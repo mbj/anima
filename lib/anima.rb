@@ -31,8 +31,8 @@ class Anima < Module
   # @return [Anima]
   #
   # @example
-  #   anima = Anima.new(:foo, :bar)
-  #   anima.add(:foo) # equals Anima.new(:foo, :bar)
+  #   anima = Anima.new(:foo)
+  #   anima.add(:bar) # equals Anima.new(:foo, :bar)
   #
   # @api private
   #
@@ -45,7 +45,7 @@ class Anima < Module
   # @return [Anima]
   #
   # @example
-  #   anima = Anima.new(:foo)
+  #   anima = Anima.new(:foo, :bar)
   #   anima.remove(:bar) # equals Anima.new(:foo)
   #
   # @api public
