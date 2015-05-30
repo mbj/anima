@@ -35,9 +35,10 @@ ClassVariable:
 BooleanParameter:
   exclude: []
   enabled: true
+# Buggy like hell
 IrresponsibleModule:
   exclude: []
-  enabled: true
+  enabled: false
 UncommunicativeModuleName:
   accept: []
   exclude: []
@@ -92,3 +93,6 @@ LongYieldList:
   max_params: 1
   exclude: []
   enabled: true
+# Thats the whole point of this lib, oOo.
+ModuleInitialize:
+  enabled: false
