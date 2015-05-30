@@ -42,7 +42,6 @@ describe Anima::Attribute do
       end
 
       it_should_behave_like 'a command method'
-
     end
 
     context 'when attribute hash does not contain key' do
