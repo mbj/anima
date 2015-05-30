@@ -76,6 +76,6 @@ TrivialAccessors:
 AndOr:
   Enabled: false
 
-# Allow empty lines around body
-EmptyLinesAroundBody:
+# I prefer it when its cleaner
+ParallelAssignment:
   Enabled: false

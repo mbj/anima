@@ -177,7 +177,6 @@ class Anima < Module
   def new(attributes)
     self.class.new(*attributes)
   end
-
 end # Anima
 
 require 'anima/error'

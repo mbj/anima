@@ -1,10 +1,8 @@
 # encoding: utf-8
 
 class Anima
-
   # Abstract base class for anima errors
   class Error < RuntimeError
-
     # Error for unknown attributes
     class Unknown < self
     end

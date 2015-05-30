@@ -3,7 +3,6 @@
 class Anima
   # Module for mixin in update functionality to anima infected clases
   module Update
-
     # Return updated instance
     #
     # @example
@@ -25,6 +24,5 @@ class Anima
     def update(attributes)
       self.class.new(to_h.update(attributes))
     end
-
   end # Update
 end # Anima

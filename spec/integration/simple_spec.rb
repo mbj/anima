@@ -39,7 +39,6 @@ describe Anima, 'simple integration' do
   end
 
   context 'when instantiated with missing attributes' do
-
     let(:attributes) { {} }
 
     it 'should raise error' do

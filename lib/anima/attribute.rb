@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Anima
-
   # An attribute
   class Attribute
     include Adamantium::Flat, Equalizer.new(:name)
@@ -75,6 +74,5 @@ class Anima
 
       self
     end
-
   end # Attribute
 end # Anima
