@@ -16,6 +16,9 @@ CollectionMethods:
     inject:   'reduce'
     find:     'detect'
     find_all: 'select'
+  Exclude:
+    # The Pathname#find method is mistakenly identified as Enumberable#find
+    - lib/tasks/assets_precompile_nodigest.rake
 
 # Do not force public/protected/private keyword to be indented at the same
 # level as the def keyword. My personal preference is to outdent these keywords
@@ -26,38 +29,20 @@ CollectionMethods:
 AccessModifierIndentation:
   Enabled: false
 
-MethodLength:
-  CountComments: false
-  Max: 17 # TODO: Bring down to 10
-
-RegexpLiteral: # I do not agree %r(\A) is more readable than /\A/
-  Enabled: false
-
-Eval:
-  Enabled: false # Mutant must use Kernel#eval to inject mutated source
-
 # Limit line length
 LineLength:
-  Max: 124  # TODO: lower to 79
+  Max: 79
 
 # Disable documentation checking until a class needs to be documented once
 Documentation:
   Enabled: false
 
+# Do not always use &&/|| instead of and/or.
+AndOr:
+  Enabled: false
+
 # Do not favor modifier if/unless usage when you have a single-line body
 IfUnlessModifier:
-  Enabled: false
-
-# Mutant needs to define methods like def bar; end in specs
-Semicolon:
-  Enabled: false
-
-# Mutant needs to define multiple methods on same line in specs
-EmptyLineBetweenDefs:
-  Enabled: false
-
-# Mutant needs to define singleton methods like Foo.bar in specs
-ClassMethods:
   Enabled: false
 
 # Allow case equality operator (in limited use within the specs)
@@ -72,10 +57,81 @@ ConstantName:
 TrivialAccessors:
   Enabled: false
 
-# And also have a differend opinion here
-AndOr:
+# Allow empty lines around class body
+EmptyLinesAroundClassBody:
   Enabled: false
 
-# I prefer it when its cleaner
+# Allow empty lines around module body
+EmptyLinesAroundModuleBody:
+  Enabled: false
+
+# Allow empty lines around block body
+EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Allow multiple line operations to not require indentation
+MultilineOperationIndentation:
+  Enabled: false
+
+# Prefer String#% over Kernel#sprintf
+FormatString:
+  Enabled: false
+
+# Use square brackets for literal Array objects
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  '{}'
+    '%i': '[]'
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': '[]'
+    '%W': '[]'
+    '%x': ()
+
+# Use %i[...] for arrays of symbols
+SymbolArray:
+  Enabled: true
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Do not always align parameters when it is easier to read
+AlignParameters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Do not prefer double quotes to be used when %q or %Q is more appropriate
+UnneededPercentQ:
+  Enabled: false
+
+# Allow a maximum ABC score
+Metrics/AbcSize:
+  Max: 21.02
+
+# Do not prefer lambda.call(...) over lambda.(...)
+LambdaCall:
+  Enabled: false
+
+# Buggy cop, returns false positive for our code base
+NonLocalExitFromIterator:
+  Enabled: false
+
+# To allow alignment of similar expressions we want to allow more than one
+# space around operators:
+#
+# let(:a) { bar    + something }
+# let(:b) { foobar + something }
+#
+SpaceAroundOperators:
+  Enabled: false
+
+# We use parallel assignments with great success
 ParallelAssignment:
   Enabled: false

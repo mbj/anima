@@ -109,7 +109,11 @@ describe Anima do
 
       it 'should initialize target instance variables' do
         subject
-        target.instance_variables.map(&:to_sym).to_set.should eql([:@foo, :@bar].to_set)
+        target
+          .instance_variables
+          .map(&:to_sym)
+          .to_set
+          .should eql(%i[@foo @bar].to_set)
         target.instance_variable_get(:@foo).should be(foo)
         target.instance_variable_get(:@bar).should be(bar)
       end
@@ -121,7 +125,10 @@ describe Anima do
       let(:attribute_hash) { { foo: foo, bar: bar, baz: double('Baz') } }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Unknown, Anima::Error::Unknown.new(target, [:baz]).message)
+        expect { subject }.to raise_error(
+          Anima::Error::Unknown,
+          Anima::Error::Unknown.new(target, [:baz]).message
+        )
       end
     end
 
@@ -129,7 +136,10 @@ describe Anima do
       let(:attribute_hash) { { bar: bar } }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target, :foo).message)
+        expect { subject }.to raise_error(
+          Anima::Error::Missing,
+          Anima::Error::Missing.new(target, :foo).message
+        )
       end
     end
   end
