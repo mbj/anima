@@ -89,7 +89,7 @@ describe Anima do
       subject { target }
 
       it 'should define attribute hash reader' do
-        instance.to_h.should eql(foo: value)
+        expect(instance.to_h).to eql(foo: value)
       end
 
       its(:anima) { should be(object) }
@@ -109,13 +109,15 @@ describe Anima do
 
       it 'should initialize target instance variables' do
         subject
-        target
-          .instance_variables
-          .map(&:to_sym)
-          .to_set
-          .should eql(%i[@foo @bar].to_set)
-        target.instance_variable_get(:@foo).should be(foo)
-        target.instance_variable_get(:@bar).should be(bar)
+
+        expect(
+          target
+            .instance_variables
+            .map(&:to_sym)
+            .to_set
+        ).to eql(%i[@foo @bar].to_set)
+        expect(target.instance_variable_get(:@foo)).to be(foo)
+        expect(target.instance_variable_get(:@bar)).to be(bar)
       end
 
       it_should_behave_like 'a command method'
