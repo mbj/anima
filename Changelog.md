@@ -1,3 +1,9 @@
+# v0.2.2 2015-xx-xx
+
+Changes:
+
+* Drop support for ruby < 2.1
+
 # v0.2.1 2014-04-10
 
 Changes:
