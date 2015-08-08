@@ -91,6 +91,7 @@ class Anima < Module
   #
   def initialize_instance(object, attribute_hash)
     assert_known_attributes(object, attribute_hash)
+    assert_unassigned_attributes(object, attribute_hash)
     attributes.each do |attribute|
       attribute.load(object, attribute_hash)
     end
@@ -165,6 +166,28 @@ class Anima < Module
 
     fail Error::Unknown.new(object, overflow) if overflow.any?
   end
+
+  # Fail if keys in +attribute_hash+ less than #attribute_names
+  #
+  # @param [Object] object
+  #   the object being initialized
+  #
+  # @param [Hash] attribute_hash
+  #   the attributes to initialize +object+ with
+  #
+  # @return [undefined]
+  #
+  # @raise [Error::Unknown]
+  #
+  # @api private
+
+  def assert_unassigned_attributes(object, attributes_hash)
+    underflow = attribute_names - attributes_hash.keys
+    
+    fail Error::Missing.new(object, underflow) if underflow.any?
+  end
+
+  
 
   # Return new instance
   #

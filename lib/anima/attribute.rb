@@ -42,7 +42,7 @@ class Anima
     #
     def load(object, attributes)
       value = attributes.fetch(name) do |attribute_name|
-        fail Error::Missing.new(object, attribute_name)
+        return
       end
 
       set(object, value)
