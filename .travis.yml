@@ -4,5 +4,8 @@ bundler_args: --without yard guard benchmarks
 script: "bundle exec rake ci:metrics"
 rvm:
   - '2.1'
-  - jruby
-  - rbx
+  - '2.2'
+matrix:
+  allowed_failures:
+  - jruby # Travis jruby does not run in >= 2.1 ruby yet
+  - rbx # segfault
