@@ -163,7 +163,6 @@ class Anima < Module
   # @api private
   def assert_known_attributes(object, attribute_hash)
     overflow = attribute_hash.keys - attribute_names
-
     fail Error::Unknown.new(object, overflow) if overflow.any?
   end
 
@@ -183,7 +182,6 @@ class Anima < Module
 
   def assert_unassigned_attributes(object, attributes_hash)
     underflow = attribute_names - attributes_hash.keys
-    
     fail Error::Missing.new(object, underflow) if underflow.any?
   end
 
