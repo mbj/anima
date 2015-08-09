@@ -47,7 +47,7 @@ describe Anima::Attribute do
     context 'when attribute hash does not contain key' do
       let(:attribute_hash) { {} }
       it 'should raise a key error' do
-        expect{subject}.to raise_error(KeyError)
+        expect { subject }.to raise_error(KeyError)
       end
     end
   end

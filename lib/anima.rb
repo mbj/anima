@@ -185,8 +185,6 @@ class Anima < Module
     fail Error::Missing.new(object, underflow) if underflow.any?
   end
 
-  
-
   # Return new instance
   #
   # @param [Enumerable<Symbol>] attributes

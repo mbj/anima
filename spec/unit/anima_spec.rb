@@ -138,7 +138,10 @@ describe Anima do
       let(:attribute_hash) { { bar: bar } }
 
       it 'should raise error' do
-        expect { subject }.to raise_error(Anima::Error::Missing, Anima::Error::Missing.new(target, [:foo]).message)
+        expect { subject }.to raise_error(
+          Anima::Error::Missing,
+          Anima::Error::Missing.new(target, [:foo]).message
+        )
       end
     end
   end
