@@ -140,7 +140,7 @@ describe Anima do
       it 'should raise error' do
         expect { subject }.to raise_error(
           Anima::Error::Missing,
-          Anima::Error::Missing.new(target, :foo).message
+          Anima::Error::Missing.new(target, [:foo]).message
         )
       end
     end

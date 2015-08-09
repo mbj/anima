@@ -44,7 +44,7 @@ describe Anima, 'simple integration' do
     it 'should raise error' do
       expect { subject }.to raise_error(
         Anima::Error::Missing,
-        'Missing attribute(s) :firstname for TestClass'
+        'Missing attribute(s) [:firstname, :lastname] for TestClass'
       )
     end
   end
