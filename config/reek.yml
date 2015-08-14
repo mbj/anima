@@ -22,7 +22,8 @@ UncommunicativeMethodName:
   - !ruby/regexp /[A-Z]/
 LongParameterList:
   max_params: 2  # TODO: decrease max_params to 2
-  exclude: []
+  exclude:
+  - Anima::Error#initialize # 3 params
   enabled: true
   overrides: {}
 FeatureEnvy:
@@ -64,7 +65,8 @@ DuplicateMethodCall:
   max_calls: 1
 UtilityFunction:
   max_helper_calls: 1
-  exclude: []
+  exclude:
+  - Anima::Error#initialize # false positive, calls super
   enabled: true
 Attribute:
   exclude: []

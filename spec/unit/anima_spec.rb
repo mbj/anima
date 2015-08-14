@@ -128,8 +128,8 @@ describe Anima do
 
       it 'should raise error' do
         expect { subject }.to raise_error(
-          Anima::Error::Unknown,
-          Anima::Error::Unknown.new(target, [:baz]).message
+          Anima::Error,
+          Anima::Error.new(target.class, [], [:baz]).message
         )
       end
     end
@@ -139,8 +139,7 @@ describe Anima do
 
       it 'should raise error' do
         expect { subject }.to raise_error(
-          Anima::Error::Missing,
-          Anima::Error::Missing.new(target, :foo).message
+          Anima::Error.new(target.class, [:foo], []).message
         )
       end
     end

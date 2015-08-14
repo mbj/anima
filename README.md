@@ -73,6 +73,14 @@ d.equal?(b) # => false
 
 # Hash representation
 d.to_h # => { salutation: 'Mrs', firstname: 'Sue', lastname: 'Doe' }
+
+# Disallows initialization with incompatible attributes
+
+Person.new(
+  # :saluatation key missing
+  "firstname" => "Markus", # does NOT coerce this by intention
+  :lastname   => "Schirp"
+) # raises Anima::Error with message "Person attributes missing: [:salutation, :firstname], unknown: ["firstname"]
 ```
 
 Credits

@@ -41,11 +41,7 @@ class Anima
     # @api private
     #
     def load(object, attributes)
-      value = attributes.fetch(name) do |attribute_name|
-        fail Error::Missing.new(object, attribute_name)
-      end
-
-      set(object, value)
+      set(object, attributes.fetch(name))
     end
 
     # Get attribute value from object
