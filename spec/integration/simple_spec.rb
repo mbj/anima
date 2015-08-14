@@ -32,8 +32,8 @@ describe Anima, 'simple integration' do
 
     it 'should raise error' do
       expect { subject }.to raise_error(
-        Anima::Error::Unknown,
-        'Unknown attribute(s) [:extra] for TestClass'
+        Anima::Error,
+        'TestClass attributes missing: [], unknown: [:extra]'
       )
     end
   end
@@ -43,8 +43,8 @@ describe Anima, 'simple integration' do
 
     it 'should raise error' do
       expect { subject }.to raise_error(
-        Anima::Error::Missing,
-        'Missing attribute(s) :firstname for TestClass'
+        Anima::Error,
+        'TestClass attributes missing: [:firstname, :lastname], unknown: []'
       )
     end
   end

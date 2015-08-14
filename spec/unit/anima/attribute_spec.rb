@@ -29,31 +29,16 @@ describe Anima::Attribute do
   describe '#load' do
     subject { object.load(target, attribute_hash) }
 
-    let(:target) { Object.new }
+    let(:target)         { Object.new      }
+    let(:value)          { double('Value') }
+    let(:attribute_hash) { { foo: value }  }
 
-    let(:value) { double('Value') }
-
-    context 'when attribute hash contains key' do
-      let(:attribute_hash) { { foo: value } }
-
-      it 'should set value as instance variable' do
-        subject
-        expect(target.instance_variable_get(:@foo)).to be(value)
-      end
-
-      it_should_behave_like 'a command method'
+    it 'should set value as instance variable' do
+      subject
+      expect(target.instance_variable_get(:@foo)).to be(value)
     end
 
-    context 'when attribute hash does not contain key' do
-      let(:attribute_hash) { {} }
-
-      it 'should raise error' do
-        expect { subject }.to raise_error(
-          Anima::Error::Missing,
-          Anima::Error::Missing.new(target, :foo).message
-        )
-      end
-    end
+    it_should_behave_like 'a command method'
   end
 
   describe '#instance_variable_name' do

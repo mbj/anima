@@ -2,25 +2,19 @@
 
 require 'spec_helper'
 
-describe Anima::Error, '#message' do
-  let(:object) { error.new(instance, name) }
+describe Anima::Error do
+  describe '#message' do
+    let(:object) { described_class.new(Anima, missing, unknown) }
 
-  let(:error) do
-    Class.new(described_class) do
-      def self.name
-        'Test::Error'
-      end
+    let(:missing) { %i[missing] }
+    let(:unknown) { %i[unknown] }
+
+    subject { object.message }
+
+    it 'should return the message string' do
+      should eql('Anima attributes missing: [:missing], unknown: [:unknown]')
     end
+
+    it_should_behave_like 'an idempotent method'
   end
-
-  subject { object.message }
-
-  let(:instance) { Object.new }
-  let(:name)     { 'foo' }
-
-  it 'should return the message string' do
-    should eql('Error attribute(s) "foo" for Object')
-  end
-
-  it_should_behave_like 'an idempotent method'
 end

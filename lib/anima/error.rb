@@ -3,35 +3,22 @@
 class Anima
   # Abstract base class for anima errors
   class Error < RuntimeError
-    # Error for unknown attributes
-    class Unknown < self
-    end
-
-    # Error for missing attributes
-    class Missing < self
-    end
-
-    include AbstractType
-
-    DOUBLE_COLON = '::'.freeze
+    FORMAT = '%s attributes missing: %s, unknown: %s'.freeze
+    private_constant(*constants(false))
 
     # Initialize object
     #
-    # @param [Object] object
-    # @param [Enumerable<Symbol>] names
+    # @param [Class] klass
+    #   the class being initialized
+    # @param [Enumerable<Symbol>] missing
+    # @param [Enumerable<Symbol>] unknown
     #
     # @return [undefined]
     #
     # @api private
     #
-    def initialize(object, names)
-      super("#{name} attribute(s) #{names.inspect} for #{object.class}")
-    end
-
-    private
-
-    def name
-      self.class.name.split(DOUBLE_COLON).last
+    def initialize(klass, missing, unknown)
+      super(FORMAT % [klass, missing, unknown])
     end
   end # Error
 end # Anima

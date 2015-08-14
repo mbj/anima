@@ -90,7 +90,7 @@ class Anima < Module
   # @api private
   #
   def initialize_instance(object, attribute_hash)
-    assert_known_attributes(object, attribute_hash)
+    assert_known_attributes(object.class, attribute_hash)
     attributes.each do |attribute|
       attribute.load(object, attribute_hash)
     end
@@ -149,21 +149,24 @@ class Anima < Module
 
   # Fail unless keys in +attribute_hash+ matches #attribute_names
   #
-  # @param [Object] object
-  #   the object being initialized
+  # @param [Class] klass
+  #   the class being initialized
   #
   # @param [Hash] attribute_hash
   #   the attributes to initialize +object+ with
   #
   # @return [undefined]
   #
-  # @raise [Error::Unknown]
+  # @raise [Error]
   #
   # @api private
-  def assert_known_attributes(object, attribute_hash)
-    overflow = attribute_hash.keys - attribute_names
+  def assert_known_attributes(klass, attribute_hash)
+    keys = attribute_hash.keys
 
-    fail Error::Unknown.new(object, overflow) if overflow.any?
+    unknown = keys - attribute_names
+    missing = attribute_names - keys
+
+    fail Error.new(klass, missing, unknown) if unknown.any? || missing.any?
   end
 
   # Return new instance
