@@ -174,4 +174,28 @@ describe Anima do
 
     it { should eql(params) }
   end
+
+  describe '#with' do
+    subject { object.with(attributes) }
+
+    let(:klass) do
+      Class.new do
+        include Anima.new(:foo, :bar)
+      end
+    end
+
+    let(:object) { klass.new(foo: 1, bar: 2) }
+
+    context 'with empty attributes' do
+      let(:attributes) { {} }
+
+      it { should eql(object) }
+    end
+
+    context 'with updated attribute' do
+      let(:attributes) { { foo: 3 } }
+
+      it { should eql(klass.new(foo: 3, bar: 2)) }
+    end
+  end
 end
