@@ -59,11 +59,7 @@ a.eql?(c)   # => true
 a.equal?(c) # => false
 
 # Functional-style updates
-class Person
-  include Anima::Update
-end
-
-d = b.update(
+d = b.with(
   salutation: 'Mrs',
   firstname:  'Sue',
 )

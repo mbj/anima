@@ -119,6 +119,28 @@ class Anima < Module
     def to_h
       self.class.anima.attributes_hash(self)
     end
+
+    # Return updated instance
+    #
+    # @example
+    #   klass = Class.new do
+    #     include Anima.new(:foo, :bar)
+    #   end
+    #
+    #   foo = klass.new(:foo => 1, :bar => 2)
+    #   updated = foo.with(:foo => 3)
+    #   updated.foo # => 3
+    #   updated.bar # => 2
+    #
+    # @param [Hash] attributes
+    #
+    # @return [Anima]
+    #
+    # @api private
+    #
+    def with(attributes)
+      self.class.new(to_h.update(attributes))
+    end
   end # InstanceMethods
 
   private
@@ -184,4 +206,3 @@ end # Anima
 
 require 'anima/error'
 require 'anima/attribute'
-require 'anima/update'

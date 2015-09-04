@@ -1,8 +1,10 @@
-# v0.2.2 2015-xx-xx
+# v0.3.0 2015-xx-xx
 
 Changes:
 
 * Drop support for ruby < 2.1
+* Drop support for Anima::Update
+* Add #with as a replacement that is active by default [#13]
 
 # v0.2.1 2014-04-10
 

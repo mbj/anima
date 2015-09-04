@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name     = 'anima'
-  s.version  = '0.2.2'
+  s.version  = '0.3.0'
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@schirp-dso.com'
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.1.0'
 
-  s.add_dependency('adamantium',    '~> 0.1')
-  s.add_dependency('equalizer',     '~> 0.0.8')
+  s.add_dependency('adamantium',    '~> 0.2')
+  s.add_dependency('equalizer',     '~> 0.0.11')
   s.add_dependency('abstract_type', '~> 0.0.7')
 end
