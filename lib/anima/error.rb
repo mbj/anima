@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Anima
   # Abstract base class for anima errors
   class Error < RuntimeError
@@ -14,9 +12,6 @@ class Anima
     # @param [Enumerable<Symbol>] unknown
     #
     # @return [undefined]
-    #
-    # @api private
-    #
     def initialize(klass, missing, unknown)
       super(FORMAT % [klass, missing, unknown])
     end

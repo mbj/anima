@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-require 'spec_helper'
-
 describe Anima::Error do
   describe '#message' do
     let(:object) { described_class.new(Anima, missing, unknown) }

@@ -1,7 +1,3 @@
-# encoding: utf-8
-
-require 'spec_helper'
-
 class TestClass
   include Anima.new(:firstname, :lastname)
 end

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Anima
   # An attribute
   class Attribute
@@ -8,9 +6,6 @@ class Anima
     # Initialize attribute
     #
     # @param [Symbol] name
-    #
-    # @api private
-    #
     def initialize(name)
       @name, @instance_variable_name = name, :"@#{name}"
     end
@@ -18,17 +13,11 @@ class Anima
     # Return attribute name
     #
     # @return [Symbol]
-    #
-    # @api private
-    #
     attr_reader :name
 
     # Return instance variable name
     #
     # @return [Symbol]
-    #
-    # @api private
-    #
     attr_reader :instance_variable_name
 
     # Load attribute
@@ -37,9 +26,6 @@ class Anima
     # @param [Hash] attributes
     #
     # @return [self]
-    #
-    # @api private
-    #
     def load(object, attributes)
       set(object, attributes.fetch(name))
     end
@@ -49,9 +35,6 @@ class Anima
     # @param [Object] object
     #
     # @return [Object]
-    #
-    # @api private
-    #
     def get(object)
       object.public_send(name)
     end
@@ -62,9 +45,6 @@ class Anima
     # @param [Object] value
     #
     # @return [self]
-    #
-    # @api private
-    #
     def set(object, value)
       object.instance_variable_set(instance_variable_name, value)
 
