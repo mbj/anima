@@ -1,4 +1,9 @@
-# v0.3.0 2015-xx-xx
+# v0.4.0 2015-xx-xx
+
+* Default attributes to protected visiblity
+* Provide Anima::Public for public semantics
+
+# v0.3.0 2015-06-04
 
 Changes:
 

@@ -60,6 +60,8 @@ describe Anima do
   end
 
   describe '#included' do
+    let(:described_class) { Anima::Public }
+
     let(:target) do
       object = self.object
       Class.new do
@@ -163,7 +165,7 @@ describe Anima do
     let(:params)   { Hash[foo: :bar] }
     let(:klass) do
       Class.new do
-        include Anima.new(:foo)
+        include Anima::Public.new(:foo)
       end
     end
 
@@ -175,7 +177,7 @@ describe Anima do
 
     let(:klass) do
       Class.new do
-        include Anima.new(:foo, :bar)
+        include Anima::Public.new(:foo, :bar)
       end
     end
 

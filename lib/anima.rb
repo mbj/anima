@@ -7,6 +7,9 @@ require 'abstract_type'
 class Anima < Module
   include Adamantium::Flat, Equalizer.new(:attributes)
 
+  INSTANCE_METHODS = %i[to_h with].freeze
+  private_constant(*constants(false))
+
   # Return names
   #
   # @return [AttributeSet]
@@ -125,7 +128,7 @@ class Anima < Module
 
   private
 
-  # Infect the instance with anima
+  # Infect the descendant with anima semantics
   #
   # @param [Class, Module] scope
   #
@@ -137,9 +140,11 @@ class Anima < Module
 
       # Define instance methods
       include InstanceMethods
+      protected(*INSTANCE_METHODS)
 
       # Define attribute readers
       attr_reader(*names)
+      protected(*names)
 
       # Define equalizer
       include Equalizer.new(*names)
@@ -173,6 +178,22 @@ class Anima < Module
   # @return [Anima]
   def new(attributes)
     self.class.new(*attributes)
+  end
+
+  # Anima with default attribute readers set to public visiblity
+  class Public < self
+    # Infect the descendant with anima semantics
+    #
+    # @param [Class, Module] scope
+    #
+    # @return [undefined]
+    def included(descendant)
+      super
+      descendant.instance_exec(attribute_names) do |attribute_names|
+        public(*attribute_names)
+        public(*INSTANCE_METHODS)
+      end
+    end
   end
 end # Anima
 
