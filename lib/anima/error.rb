@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Anima
   # Abstract base class for anima errors
   class Error < RuntimeError

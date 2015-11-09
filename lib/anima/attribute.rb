@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Anima
   # An attribute
   class Attribute
