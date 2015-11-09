@@ -117,7 +117,7 @@ class Anima < Module
     #
     # @return [Anima]
     #
-    # @api private
+    # @api public
     def with(attributes)
       self.class.new(to_h.update(attributes))
     end
