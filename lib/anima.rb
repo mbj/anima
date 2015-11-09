@@ -91,6 +91,9 @@ class Anima < Module
 
     # Return a hash representation of an anima infected object
     #
+    # @example
+    #   anima.to_h # => { :foo => : bar }
+    #
     # @return [Hash]
     #
     # @api public
