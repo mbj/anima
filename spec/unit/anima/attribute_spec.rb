@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Anima::Attribute do
   let(:object) { described_class.new(:foo) }
 

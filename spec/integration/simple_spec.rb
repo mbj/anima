@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 class TestClass
   include Anima.new(:firstname, :lastname)
 end
