@@ -3,23 +3,18 @@ require 'equalizer'
 require 'abstract_type'
 
 # Main library namespace and mixin
+# @api private
 class Anima < Module
   include Adamantium::Flat, Equalizer.new(:attributes)
 
   # Return names
   #
   # @return [AttributeSet]
-  #
-  # @api private
-  #
   attr_reader :attributes
 
   # Initialize object
   #
   # @return [undefined]
-  #
-  # @api private
-  #
   def initialize(*names)
     @attributes = names.uniq.map(&Attribute.method(:new)).freeze
   end
@@ -31,8 +26,6 @@ class Anima < Module
   # @example
   #   anima = Anima.new(:foo)
   #   anima.add(:bar) # equals Anima.new(:foo, :bar)
-  #
-  # @api private
   #
   def add(*names)
     new(attribute_names + names)
@@ -46,8 +39,6 @@ class Anima < Module
   #   anima = Anima.new(:foo, :bar)
   #   anima.remove(:bar) # equals Anima.new(:foo)
   #
-  # @api public
-  #
   def remove(*names)
     new(attribute_names - names)
   end
@@ -57,9 +48,6 @@ class Anima < Module
   # @param [Object] object
   #
   # @return [Hash]
-  #
-  # @api private
-  #
   def attributes_hash(object)
     attributes.each_with_object({}) do |attribute, attributes_hash|
       attributes_hash[attribute.name] = attribute.get(object)
@@ -69,9 +57,6 @@ class Anima < Module
   # Return attribute names
   #
   # @return [Enumerable<Symbol>]
-  #
-  # @api private
-  #
   def attribute_names
     attributes.map(&:name)
   end
@@ -84,9 +69,6 @@ class Anima < Module
   # @param [Hash] attribute_hash
   #
   # @return [self]
-  #
-  # @api private
-  #
   def initialize_instance(object, attribute_hash)
     assert_known_attributes(object.class, attribute_hash)
     attributes.each do |attribute|
@@ -103,8 +85,6 @@ class Anima < Module
     #   a hash that matches anima defined attributes
     #
     # @return [undefined]
-    #
-    # @api public
     def initialize(attributes)
       self.class.anima.initialize_instance(self, attributes)
     end
@@ -135,7 +115,6 @@ class Anima < Module
     # @return [Anima]
     #
     # @api private
-    #
     def with(attributes)
       self.class.new(to_h.update(attributes))
     end
@@ -148,9 +127,6 @@ class Anima < Module
   # @param [Class, Module] scope
   #
   # @return [undefined]
-  #
-  # @api private
-  #
   def included(descendant)
     descendant.instance_exec(self, attribute_names) do |anima, names|
       # Define anima method
@@ -178,8 +154,6 @@ class Anima < Module
   # @return [undefined]
   #
   # @raise [Error]
-  #
-  # @api private
   def assert_known_attributes(klass, attribute_hash)
     keys = attribute_hash.keys
 
@@ -194,9 +168,6 @@ class Anima < Module
   # @param [Enumerable<Symbol>] attributes
   #
   # @return [Anima]
-  #
-  # @api private
-  #
   def new(attributes)
     self.class.new(*attributes)
   end

@@ -12,9 +12,6 @@ class Anima
     # @param [Enumerable<Symbol>] unknown
     #
     # @return [undefined]
-    #
-    # @api private
-    #
     def initialize(klass, missing, unknown)
       super(FORMAT % [klass, missing, unknown])
     end
