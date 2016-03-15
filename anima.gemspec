@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('adamantium',    '~> 0.2')
   s.add_dependency('equalizer',     '~> 0.0.11')
-  s.add_dependency('abstract_type', '~> 0.0.7')
 
-  s.add_development_dependency('devtools', '~> 0.1.2')
+  s.add_development_dependency('devtools', '0.1.2')
 end
