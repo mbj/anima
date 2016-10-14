@@ -1,4 +1,10 @@
-# v0.3.0 2015-xx-xx
+# v0.3.1 2015-09-04
+
+Changes:
+
+* Allow private attribute reads visible from `#to_h` / `#with`
+
+# v0.3.0 2015-09-04
 
 Changes:
 
@@ -17,7 +23,7 @@ Changes:
 Breaking changes:
 
 * Remove AnimaInfectedClass.attributes_hash(instance)
-* Replace with AnimaInfectedClass#to_h
+* Replace with `AnimaInfectedClass#to_h`
 
 # v0.1.1 2013-09-08
 

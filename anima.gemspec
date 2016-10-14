@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = 'anima'
-  s.version  = '0.3.0'
+  s.version  = '0.3.1'
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@schirp-dso.com'
