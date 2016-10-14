@@ -36,7 +36,7 @@ class Anima
     #
     # @return [Object]
     def get(object)
-      object.public_send(name)
+      object.__send__(name)
     end
 
     # Set attribute value in object
