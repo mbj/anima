@@ -96,7 +96,7 @@ SymbolArray:
 
 # Align if/else blocks with the variable assignment
 EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
 
 # Do not always align parameters when it is easier to read
 AlignParameters:
@@ -135,3 +135,12 @@ SpaceAroundOperators:
 # We use parallel assignments with great success
 ParallelAssignment:
   Enabled: false
+
+# Allow use long blocks with RSpec
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Allow use `fail` or `raise` for exceptions
+Style/SignalException:
+  EnforcedStyle: semantic

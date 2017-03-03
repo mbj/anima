@@ -61,7 +61,7 @@ describe Anima do
 
   describe '#included' do
     let(:target) do
-      object = self.object
+      object = self.object # rubocop:disable Style/RedundantSelf
       Class.new do
         include object
       end
