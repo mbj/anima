@@ -1,7 +1,7 @@
 anima
 =====
 
-[![Build Status](https://secure.travis-ci.org/mbj/anima.png?branch=master)](http://travis-ci.org/mbj/anima)
+[![CircleCI Build Status](https://circleci.com/gh/mbj/anima.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/mbj/anima)
 [![Dependency Status](https://gemnasium.com/mbj/anima.png)](https://gemnasium.com/mbj/anima)
 [![Code Climate](https://codeclimate.com/github/mbj/anima.png)](https://codeclimate.com/github/mbj/anima)
 [![Gem Version](https://img.shields.io/gem/v/anima.svg)](https://rubygems.org/gems/anima)
