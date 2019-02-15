@@ -128,6 +128,17 @@ describe Anima do
           Anima::Error.new(target.class, [], [:baz]).message
         )
       end
+
+      context 'and the extra key is falsy' do
+        let(:attribute_hash) { { foo: foo, bar: bar, nil => double('Baz') } }
+
+        it 'should raise error' do
+          expect { subject }.to raise_error(
+            Anima::Error,
+            Anima::Error.new(target.class, [], [nil]).message
+          )
+        end
+      end
     end
 
     context 'when a key is missing in attribute hash' do

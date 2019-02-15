@@ -1,4 +1,8 @@
-# v0.3.0 2015-xx-xx
+# v0.3.1 2018-02-15
+
+* Fix falsy key match detection
+
+# v0.3.0 2015-09-04
 
 Changes:
 
