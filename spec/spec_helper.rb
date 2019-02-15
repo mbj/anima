@@ -1,3 +1,2 @@
 require 'anima'
-require 'devtools'
-Devtools.init_spec_helper
+require 'devtools/spec_helper'
