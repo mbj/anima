@@ -1,0 +1,32 @@
+defaults: &defaults
+  working_directory: ~/anima
+  docker:
+    - image: circleci/ruby:2.6.0
+version: 2
+jobs:
+  unit_specs:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rspec spec/unit
+  metrics:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake metrics:rubocop
+      - run: bundle exec rake metrics:reek
+  mutant:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake metrics:mutant
+workflows:
+  version: 2
+  test:
+    jobs:
+      - unit_specs
+      - metrics
+      - mutant

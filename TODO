@@ -1,3 +1,0 @@
-* Use module subclass trick to improve expressiveness of Attribute / AttributeSet / ClassMethod
-* Add ability to freeze attribute_set via dsl
-* Add full unit spec coverage
