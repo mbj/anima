@@ -163,7 +163,9 @@ class Anima < Module
     unknown = keys - attribute_names
     missing = attribute_names - keys
 
-    fail Error.new(klass, missing, unknown) if unknown.any? || missing.any?
+    unless unknown.empty? && missing.empty?
+      fail Error.new(klass, missing, unknown)
+    end
   end
 
   # Return new instance
