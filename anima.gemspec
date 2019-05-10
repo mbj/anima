@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.add_dependency('equalizer',     '~> 0.0.11')
   s.add_dependency('abstract_type', '~> 0.0.7')
 
-  s.add_development_dependency('devtools', '~> 0.1.23')
+  s.add_development_dependency('devtools', '~> 0.1.24')
 end

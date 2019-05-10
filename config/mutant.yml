@@ -1,4 +1,2 @@
 ---
-name: anima
-namespace: Anima
-zombify: true
+integration: rspec
