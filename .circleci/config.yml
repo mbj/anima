@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - run: bundle install
-      - run: bundle exec rake metrics:mutant
+      - run: bundle exec mutant --zombie 'Anima*'
 workflows:
   version: 2
   test:
