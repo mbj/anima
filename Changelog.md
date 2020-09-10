@@ -1,3 +1,7 @@
+# v0.3.2 2020-09-10
+
+* Change packaging to not rely on git.
+
 # v0.3.1 2018-02-15
 
 * Fix falsy key match detection

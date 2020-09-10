@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = 'anima'
-  s.version  = '0.3.1'
+  s.version  = '0.3.2'
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@schirp-dso.com'
@@ -8,8 +8,7 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/mbj/anima'
   s.license  = 'MIT'
 
-  s.files            = `git ls-files`.split("\n")
-  s.test_files       = `git ls-files -- {spec,features}/*`.split("\n")
+  s.files            = Dir.glob('lib/**/*')
   s.require_paths    = %w(lib)
   s.extra_rdoc_files = %w(README.md)
 
