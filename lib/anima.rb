@@ -91,14 +91,17 @@ class Anima < Module
 
     # Return a hash representation of an anima infected object
     #
-    # @example
+    # @example without block
     #   anima.to_h # => { :foo => : bar }
+    #
+    # @example with block
+    #   anima.to_h { |key, value| [key.to_s, value.to_s] }  # => { 'foo' => 'bar' }
     #
     # @return [Hash]
     #
     # @api public
-    def to_h
-      self.class.anima.attributes_hash(self)
+    def to_h(&block)
+      self.class.anima.attributes_hash(self).to_h(&block)
     end
 
     # Return updated instance

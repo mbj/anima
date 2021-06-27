@@ -168,8 +168,6 @@ describe Anima do
   end
 
   describe '#to_h on an anima infected instance' do
-    subject { instance.to_h }
-
     let(:instance) { klass.new(params) }
     let(:params)   { Hash[foo: :bar] }
     let(:klass) do
@@ -178,7 +176,17 @@ describe Anima do
       end
     end
 
-    it { should eql(params) }
+    context 'without a block' do
+      subject { instance.to_h }
+
+      it { should eql(params) }
+    end
+
+    context 'with a block' do
+      subject { instance.to_h { |key, value| [key.to_s, value.to_s] } }
+
+      it { should eql('foo' => 'bar') }
+    end
   end
 
   describe '#with' do
