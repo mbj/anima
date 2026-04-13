@@ -1,0 +1,42 @@
+class Anima < Module
+  include Adamantium::Flat
+  extend Adamantium::Flat::ClassMethods
+
+  attr_reader attributes: Array[Anima::Attribute]
+
+  def initialize: (*Symbol names) -> void
+
+  def add: (*Symbol names) -> Anima
+
+  def remove: (*Symbol names) -> Anima
+
+  def attributes_hash: (untyped object) -> Hash[Symbol, untyped]
+
+  def attribute_names: () -> Array[Symbol]
+
+  def initialize_instance: (untyped object, Hash[Symbol, untyped] attribute_hash) -> self
+
+  interface _AnimaClass
+    def anima: () -> Anima
+
+    def new: (Hash[Symbol, untyped] attributes) -> InstanceMethods
+  end
+
+  interface _AnimaInstance
+    def class: () -> _AnimaClass
+  end
+
+  module InstanceMethods : _AnimaInstance
+    def initialize: (Hash[Symbol, untyped] attributes) -> void
+
+    def to_h: () -> Hash[Symbol, untyped]
+
+    def with: (Hash[Symbol, untyped] attributes) -> InstanceMethods
+  end
+
+  private
+
+  def included: (Module descendant) -> void
+
+  def assert_known_attributes: (Class klass, Hash[Symbol, untyped] attribute_hash) -> void
+end

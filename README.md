@@ -1,7 +1,11 @@
 anima
 =====
 
-![CI](https://github.com/mbj/anima/workflows/CI/badge.svg)
+![Specs](https://github.com/mbj/anima/workflows/Specs/badge.svg)
+![Mutant](https://github.com/mbj/anima/workflows/Mutant/badge.svg)
+![Rubocop](https://github.com/mbj/anima/workflows/Rubocop/badge.svg)
+![Steep](https://github.com/mbj/anima/workflows/Steep/badge.svg)
+![Yardstick](https://github.com/mbj/anima/workflows/Yardstick/badge.svg)
 
 Simple library to declare read only attributes on value-objects that are initialized via attributes hash.
 

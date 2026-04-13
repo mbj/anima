@@ -1,0 +1,3 @@
+class Equalizer < Module
+  def initialize: (*Symbol keys) -> void
+end

@@ -1,8 +1,10 @@
-describe Anima::Attribute do
+# frozen_string_literal: true
+
+RSpec.describe Anima::Attribute do
   let(:object) { described_class.new(:foo) }
 
   describe '#get' do
-    subject { object.get(target) }
+    subject(:result) { object.get(target) }
 
     let(:target_class) do
       Class.new do
@@ -15,47 +17,46 @@ describe Anima::Attribute do
     end
 
     let(:target) { target_class.new(value) }
-    let(:value) { double('Value') }
+    let(:value) { Object.new }
 
-    it 'should return value' do
-      should be(value)
+    it 'returns value' do
+      expect(result).to be(value)
     end
   end
 
   describe '#load' do
-    subject { object.load(target, attribute_hash) }
+    subject(:result) { object.load(target, attribute_hash) }
 
-    let(:target)         { Object.new      }
-    let(:value)          { double('Value') }
-    let(:attribute_hash) { { foo: value }  }
+    let(:target)         { Object.new     }
+    let(:value)          { Object.new     }
+    let(:attribute_hash) { { foo: value } }
 
-    it 'should set value as instance variable' do
-      subject
+    it 'sets value as instance variable' do
+      result
       expect(target.instance_variable_get(:@foo)).to be(value)
     end
 
-    it_should_behave_like 'a command method'
+    it_behaves_like 'a command method'
   end
 
   describe '#instance_variable_name' do
-    subject { object.instance_variable_name }
+    subject(:result) { object.instance_variable_name }
 
-    it { should be(:@foo) }
+    it { is_expected.to be(:@foo) }
 
-    it_should_behave_like 'an idempotent method'
+    it_behaves_like 'an idempotent method'
   end
 
   describe '#set' do
-    subject { object.set(target, value) }
+    subject(:result) { object.set(target, value) }
 
     let(:target) { Object.new }
+    let(:value) { Object.new }
 
-    let(:value) { double('Value') }
+    it_behaves_like 'a command method'
 
-    it_should_behave_like 'a command method'
-
-    it 'should set value as instance variable' do
-      subject
+    it 'sets value as instance variable' do
+      result
       expect(target.instance_variable_get(:@foo)).to be(value)
     end
   end

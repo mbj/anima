@@ -1,0 +1,17 @@
+class Anima
+  class Attribute
+    include Adamantium::Flat
+
+    attr_reader name: Symbol
+
+    attr_reader instance_variable_name: Symbol
+
+    def initialize: (Symbol name) -> void
+
+    def load: (untyped object, Hash[Symbol, untyped] attributes) -> self
+
+    def get: (untyped object) -> untyped
+
+    def set: (untyped object, untyped value) -> self
+  end
+end

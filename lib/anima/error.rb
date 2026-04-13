@@ -1,19 +1,24 @@
-class Anima
-  # Abstract base class for anima errors
-  class Error < RuntimeError
-    FORMAT = '%s attributes missing: %s, unknown: %s'.freeze
-    private_constant(*constants(false))
+# frozen_string_literal: true
 
-    # Initialize object
+class Anima
+  # Error raised when attribute validation fails
+  class Error < RuntimeError
+    # Format string for error messages
+    FORMAT = '%s attributes missing: %s, unknown: %s'
+    private_constant(:FORMAT)
+
+    # Initialize error with class and attribute details
     #
     # @param [Class] klass
-    #   the class being initialized
-    # @param [Enumerable<Symbol>] missing
-    # @param [Enumerable<Symbol>] unknown
+    # @param [Array<Symbol>] missing
+    # @param [Array<Symbol>] unknown
     #
-    # @return [undefined]
+    # @return [void]
+    #
+    # @example
+    #   Error.new(Person, [:name], [:extra])
     def initialize(klass, missing, unknown)
-      super(FORMAT % [klass, missing, unknown])
+      super(format(FORMAT, klass, missing, unknown))
     end
-  end # Error
-end # Anima
+  end
+end

@@ -1,34 +1,36 @@
-describe Anima do
+# frozen_string_literal: true
+
+RSpec.describe Anima do
   let(:object) { described_class.new(:foo) }
 
   describe '#attributes_hash' do
-    let(:value)    { double('Value')    }
-    let(:instance) { double(foo: value) }
+    subject(:result) { object.attributes_hash(instance) }
 
-    subject { object.attributes_hash(instance) }
+    let(:value) { Object.new }
+    let(:instance) { Struct.new(:foo).new(value) }
 
-    it { should eql(foo: value) }
+    it { is_expected.to eql(foo: value) }
   end
 
   describe '#remove' do
-    let(:object)  { described_class.new(:foo, :bar) }
+    let(:object) { described_class.new(:foo, :bar) }
 
     context 'with single attribute' do
       subject { object.remove(:bar) }
 
-      it { should eql(described_class.new(:foo)) }
+      it { is_expected.to eql(described_class.new(:foo)) }
     end
 
     context 'with multiple attributes' do
       subject { object.remove(:foo, :bar) }
 
-      it { should eql(described_class.new) }
+      it { is_expected.to eql(described_class.new) }
     end
 
     context 'with inexisting attribute' do
       subject { object.remove(:baz) }
 
-      it { should eql(object) }
+      it { is_expected.to eql(object) }
     end
   end
 
@@ -36,27 +38,27 @@ describe Anima do
     context 'with single attribute' do
       subject { object.add(:bar) }
 
-      it { should eql(described_class.new(:foo, :bar)) }
+      it { is_expected.to eql(described_class.new(:foo, :bar)) }
     end
 
     context 'with multiple attributes' do
       subject { object.add(:bar, :baz) }
 
-      it { should eql(described_class.new(:foo, :bar, :baz)) }
+      it { is_expected.to eql(described_class.new(:foo, :bar, :baz)) }
     end
 
-    context 'with duplicate attribute ' do
+    context 'with duplicate attribute' do
       subject { object.add(:foo) }
 
-      it { should eql(object) }
+      it { is_expected.to eql(object) }
     end
   end
 
   describe '#attributes' do
     subject { object.attributes }
 
-    it { should eql([Anima::Attribute.new(:foo)]) }
-    it { should be_frozen                         }
+    it { is_expected.to eql([Anima::Attribute.new(:foo)]) }
+    it { is_expected.to be_frozen                         }
   end
 
   describe '#included' do
@@ -67,85 +69,87 @@ describe Anima do
       end
     end
 
-    let(:value)      { double('Value')                }
-    let(:instance)   { target.new(foo: value)         }
-    let(:instance_b) { target.new(foo: value)         }
-    let(:instance_c) { target.new(foo: double('Bar')) }
+    let(:value) { Object.new }
 
-    context 'on instance' do
-      subject { instance }
+    context 'with instance' do
+      subject(:instance) { target.new(foo: value) }
 
-      its(:foo) { should be(value) }
+      let(:instance_b) { target.new(foo: value) }
+      let(:instance_c) { target.new(foo: Object.new) }
 
-      it { should eql(instance_b) }
-      it { should_not eql(instance_c) }
+      it { expect(instance.foo).to be(value) }
+      it { is_expected.to eql(instance_b) }
+      it { is_expected.not_to eql(instance_c) }
     end
 
-    context 'on singleton' do
-      subject { target }
+    context 'with singleton' do
+      subject(:singleton) { target }
 
-      it 'should define attribute hash reader' do
+      it 'defines attribute hash reader' do
+        instance = target.new(foo: value)
         expect(instance.to_h).to eql(foo: value)
       end
 
-      its(:anima) { should be(object) }
+      it { expect(singleton.anima).to be(object) }
     end
   end
 
   describe '#initialize_instance' do
-    let(:object) { Anima.new(:foo, :bar) }
-    let(:target) { Object.new }
-    let(:foo) { double('Foo') }
-    let(:bar) { double('Bar') }
+    subject(:result) { object.initialize_instance(target, attribute_hash) }
 
-    subject { object.initialize_instance(target, attribute_hash) }
+    let(:object) { described_class.new(:foo, :bar) }
+    let(:target) { Object.new }
+    let(:foo) { Object.new }
+    let(:bar) { Object.new }
 
     context 'when all keys are present in attribute hash' do
       let(:attribute_hash) { { foo: foo, bar: bar } }
 
-      it 'should initialize target instance variables' do
-        subject
-
-        expect(
-          target
-            .instance_variables
-            .map(&:to_sym)
-            .to_set
-        ).to eql(%i[@foo @bar].to_set)
+      it 'sets foo instance variable' do
+        result
         expect(target.instance_variable_get(:@foo)).to be(foo)
+      end
+
+      it 'sets bar instance variable' do
+        result
         expect(target.instance_variable_get(:@bar)).to be(bar)
       end
 
-      it_should_behave_like 'a command method'
+      it 'sets exactly the expected instance variables' do
+        result
+        expect(target.instance_variables.to_set(&:to_sym)).to eql(%i[@foo @bar].to_set)
+      end
+
+      it_behaves_like 'a command method'
     end
 
     context 'when an extra key is present in attribute hash' do
-      let(:attribute_hash) { { foo: foo, bar: bar, baz: double('Baz') } }
+      let(:attribute_hash) { { foo: foo, bar: bar, baz: Object.new } }
 
-      it 'should raise error' do
-        expect { subject }.to raise_error(
+      it 'raises error' do
+        expect { result }.to raise_error(
           Anima::Error,
           Anima::Error.new(target.class, [], [:baz]).message
         )
       end
+    end
 
-      context 'and the extra key is falsy' do
-        let(:attribute_hash) { { foo: foo, bar: bar, nil => double('Baz') } }
+    context 'when an extra falsy key is present in attribute hash' do
+      let(:attribute_hash) { { foo: foo, bar: bar, nil => Object.new } }
 
-        it 'should raise error' do
-          expect { subject }.to raise_error(
-            Anima::Error,
-            Anima::Error.new(target.class, [], [nil]).message
-          )
-        end
+      it 'raises error' do
+        expect { result }.to raise_error(
+          Anima::Error,
+          Anima::Error.new(target.class, [], [nil]).message
+        )
       end
     end
 
     context 'when a key is missing in attribute hash' do
       let(:attribute_hash) { { bar: bar } }
 
-      it 'should raise error' do
-        expect { subject }.to raise_error(
+      it 'raises error' do
+        expect { result }.to raise_error(
           Anima::Error.new(target.class, [:foo], []).message
         )
       end
@@ -153,32 +157,33 @@ describe Anima do
   end
 
   describe 'using super in initialize' do
-    subject { klass.new }
+    subject(:instance) { klass.new }
 
     let(:klass) do
       Class.new do
         include Anima.new(:foo)
+
         def initialize(attributes = { foo: :bar })
           super
         end
       end
     end
 
-    its(:foo) { should eql(:bar) }
+    it { expect(instance.foo).to be(:bar) }
   end
 
-  describe '#to_h on an anima infected instance' do
+  describe '#to_h' do
     subject { instance.to_h }
 
     let(:instance) { klass.new(params) }
-    let(:params)   { Hash[foo: :bar] }
+    let(:params)   { { foo: :bar } }
     let(:klass) do
       Class.new do
         include Anima.new(:foo)
       end
     end
 
-    it { should eql(params) }
+    it { is_expected.to eql(params) }
   end
 
   describe '#with' do
@@ -195,13 +200,13 @@ describe Anima do
     context 'with empty attributes' do
       let(:attributes) { {} }
 
-      it { should eql(object) }
+      it { is_expected.to eql(object) }
     end
 
     context 'with updated attribute' do
       let(:attributes) { { foo: 3 } }
 
-      it { should eql(klass.new(foo: 3, bar: 2)) }
+      it { is_expected.to eql(klass.new(foo: 3, bar: 2)) }
     end
   end
 end

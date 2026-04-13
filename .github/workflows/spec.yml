@@ -1,0 +1,39 @@
+name: Specs
+
+on: push
+
+jobs:
+  unit:
+    name: Unit Specs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4', '4.0']
+    steps:
+    - uses: actions/checkout@v6
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - run: |
+        gem install bundler
+        bundle install
+    - run: bundle exec rspec spec/unit
+  integration:
+    name: Integration Specs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4', '4.0']
+    steps:
+    - uses: actions/checkout@v6
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - run: |
+        gem install bundler
+        bundle install
+    - run: bundle exec rspec spec/integration

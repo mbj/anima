@@ -1,0 +1,16 @@
+name: Yardstick
+
+on: push
+
+jobs:
+  yardstick:
+    name: Yardstick
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v6
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+    - run: bundle install
+    - run: bundle exec rake yardstick

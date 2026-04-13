@@ -1,182 +1,184 @@
+# frozen_string_literal: true
+
 require 'adamantium'
 require 'equalizer'
-require 'abstract_type'
 
-# Main library namespace and mixin
-# @api private
+# Declarative attribute definition for value objects
+#
+# @example
+#   class Person
+#     include Anima.new(:name, :age)
+#   end
+#
+# @api public
 class Anima < Module
-  include Adamantium::Flat, Equalizer.new(:attributes)
+  include Equalizer.new(:attributes)
+  include Adamantium::Flat
 
-  # Return names
+  # Attributes defined on this anima
   #
-  # @return [AttributeSet]
+  # @return [Array<Attribute>]
+  #
+  # @example
+  #   Anima.new(:foo, :bar).attributes
   attr_reader :attributes
 
-  # Initialize object
+  # Initialize anima with attribute names
   #
-  # @return [undefined]
+  # @param [Array<Symbol>] names
+  #
+  # @return [void]
+  #
+  # @example
+  #   Anima.new(:foo, :bar)
   def initialize(*names)
-    @attributes = names.uniq.map(&Attribute.method(:new)).freeze
+    @attributes = names.uniq.map { |name| Attribute.new(name) }.freeze
   end
 
   # Return new anima with attributes added
+  #
+  # @param [Array<Symbol>] names
   #
   # @return [Anima]
   #
   # @example
   #   anima = Anima.new(:foo)
   #   anima.add(:bar) # equals Anima.new(:foo, :bar)
-  #
   def add(*names)
-    new(attribute_names + names)
+    self.class.new(*(attribute_names + names))
   end
 
   # Return new anima with attributes removed
+  #
+  # @param [Array<Symbol>] names
   #
   # @return [Anima]
   #
   # @example
   #   anima = Anima.new(:foo, :bar)
   #   anima.remove(:bar) # equals Anima.new(:foo)
-  #
   def remove(*names)
-    new(attribute_names - names)
+    self.class.new(*(attribute_names - names))
   end
 
-  # Return attributes hash for instance
+  # Return attributes hash for object
   #
   # @param [Object] object
   #
-  # @return [Hash]
+  # @return [Hash{Symbol => Object}]
+  #
+  # @example
+  #   anima.attributes_hash(person) # => { name: 'Markus', age: 30 }
   def attributes_hash(object)
-    attributes.each_with_object({}) do |attribute, attributes_hash|
-      attributes_hash[attribute.name] = attribute.get(object)
-    end
+    attributes.to_h { |attribute| [attribute.name, attribute.get(object)] }
   end
 
   # Return attribute names
   #
-  # @return [Enumerable<Symbol>]
+  # @return [Array<Symbol>]
+  #
+  # @example
+  #   Anima.new(:foo, :bar).attribute_names # => [:foo, :bar]
   def attribute_names
     attributes.map(&:name)
   end
   memoize :attribute_names
 
-  # Initialize instance
+  # Initialize instance with attribute values
   #
   # @param [Object] object
-  #
-  # @param [Hash] attribute_hash
+  # @param [Hash{Symbol => Object}] attribute_hash
   #
   # @return [self]
+  #
+  # @example
+  #   anima.initialize_instance(object, foo: 1, bar: 2)
   def initialize_instance(object, attribute_hash)
     assert_known_attributes(object.class, attribute_hash)
-    attributes.each do |attribute|
-      attribute.load(object, attribute_hash)
-    end
+    attributes.each { |attribute| attribute.load(object, attribute_hash) }
     self
   end
 
-  # Static instance methods for anima infected classes
+  # Instance methods mixed into classes that include Anima
   module InstanceMethods
-    # Initialize an anima infected object
+    # Initialize an anima-defined object
     #
-    # @param [#to_h] attributes
-    #   a hash that matches anima defined attributes
+    # @param [Hash{Symbol => Object}] attributes
     #
-    # @return [undefined]
+    # @return [void]
+    #
+    # @example
+    #   Person.new(name: 'Markus', age: 30)
     def initialize(attributes)
       self.class.anima.initialize_instance(self, attributes)
     end
 
-    # Return a hash representation of an anima infected object
+    # Return hash representation
+    #
+    # @return [Hash{Symbol => Object}]
     #
     # @example
-    #   anima.to_h # => { :foo => : bar }
-    #
-    # @return [Hash]
+    #   person.to_h # => { name: 'Markus', age: 30 }
     #
     # @api public
     def to_h
       self.class.anima.attributes_hash(self)
     end
 
-    # Return updated instance
+    # Return copy with updated attributes
+    #
+    # @param [Hash{Symbol => Object}] attributes
+    #
+    # @return [Object]
     #
     # @example
-    #   klass = Class.new do
-    #     include Anima.new(:foo, :bar)
-    #   end
-    #
-    #   foo = klass.new(:foo => 1, :bar => 2)
-    #   updated = foo.with(:foo => 3)
-    #   updated.foo # => 3
-    #   updated.bar # => 2
-    #
-    # @param [Hash] attributes
-    #
-    # @return [Anima]
+    #   person.with(name: 'John') # => #<Person name="John" age=30>
     #
     # @api public
     def with(attributes)
-      self.class.new(to_h.update(attributes))
+      self.class.new(to_h.merge(attributes))
     end
-  end # InstanceMethods
+  end
 
   private
 
-  # Infect the instance with anima
+  # Hook called when anima is included into a class
   #
-  # @param [Class, Module] scope
+  # @param [Class, Module] descendant
   #
-  # @return [undefined]
+  # @return [void]
+  #
+  # @api private
   def included(descendant)
-    descendant.instance_exec(self, attribute_names) do |anima, names|
-      # Define anima method
-      define_singleton_method(:anima) { anima }
+    anima = self
+    names = attribute_names
 
-      # Define instance methods
-      include InstanceMethods
-
-      # Define attribute readers
-      attr_reader(*names)
-
-      # Define equalizer
-      include Equalizer.new(*names)
-    end
+    descendant.define_singleton_method(:anima) { anima }
+    descendant.include(InstanceMethods)
+    descendant.attr_reader(*names)
+    descendant.include(Equalizer.new(*names))
   end
 
-  # Fail unless keys in +attribute_hash+ matches #attribute_names
+  # Validate that attribute hash keys match expected attributes
   #
   # @param [Class] klass
-  #   the class being initialized
+  # @param [Hash{Symbol => Object}] attribute_hash
   #
-  # @param [Hash] attribute_hash
-  #   the attributes to initialize +object+ with
-  #
-  # @return [undefined]
+  # @return [void]
   #
   # @raise [Error]
+  #
+  # @api private
   def assert_known_attributes(klass, attribute_hash)
     keys = attribute_hash.keys
-
     unknown = keys - attribute_names
     missing = attribute_names - keys
 
-    unless unknown.empty? && missing.empty?
-      fail Error.new(klass, missing, unknown)
-    end
-  end
+    return if unknown.empty? && missing.empty?
 
-  # Return new instance
-  #
-  # @param [Enumerable<Symbol>] attributes
-  #
-  # @return [Anima]
-  def new(attributes)
-    self.class.new(*attributes)
+    raise Error.new(klass, missing, unknown)
   end
-end # Anima
+end
 
 require 'anima/error'
 require 'anima/attribute'

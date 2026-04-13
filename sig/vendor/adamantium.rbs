@@ -1,0 +1,7 @@
+module Adamantium
+  module Flat
+    module ClassMethods
+      def memoize: (Symbol name) -> void
+    end
+  end
+end

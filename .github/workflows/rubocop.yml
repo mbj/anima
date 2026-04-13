@@ -1,0 +1,16 @@
+name: Rubocop
+
+on: push
+
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v6
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+    - run: bundle install
+    - run: bundle exec rake rubocop

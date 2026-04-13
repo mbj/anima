@@ -1,6 +1,26 @@
+plugins:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-thread_safety
+
 AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
   Include:
     - 'Gemfile'
+    - 'Rakefile'
+    - 'anima.gemspec'
+    - 'lib/**/*.rb'
+    - 'spec/**/*.rb'
   Exclude:
-    - 'Gemfile.devtools'
     - 'vendor/**/*'
+
+# Steep type annotations use #: syntax
+Layout/LeadingCommentSpace:
+  AllowSteepAnnotation: true
+
+# Intentional: Anima#initialize replaces Module#initialize,
+# InstanceMethods#initialize replaces default initialize
+Lint/MissingSuper:
+  Enabled: false

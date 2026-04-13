@@ -1,33 +1,35 @@
+# frozen_string_literal: true
+
 class TestClass
   include Anima.new(:firstname, :lastname)
 end
 
-describe Anima, 'simple integration' do
-  subject { TestClass.new(attributes) }
+RSpec.describe TestClass do
+  subject(:person) { described_class.new(attributes) }
 
   context 'when instantiated with all attributes' do
     let(:attributes) do
       {
         firstname: 'Markus',
-        lastname:  'Schirp'
+        lastname: 'Schirp'
       }
     end
 
-    its(:firstname) { should eql('Markus') }
-    its(:lastname) { should eql('Schirp') }
+    it { expect(person.firstname).to eql('Markus') }
+    it { expect(person.lastname).to eql('Schirp') }
   end
 
-  context 'with instantiated with extra attributes' do
+  context 'with extra attributes' do
     let(:attributes) do
       {
         firstname: 'Markus',
-        lastname:  'Schirp',
-        extra:     'Foo'
+        lastname: 'Schirp',
+        extra: 'Foo'
       }
     end
 
-    it 'should raise error' do
-      expect { subject }.to raise_error(
+    it 'raises error' do
+      expect { person }.to raise_error(
         Anima::Error,
         'TestClass attributes missing: [], unknown: [:extra]'
       )
@@ -37,8 +39,8 @@ describe Anima, 'simple integration' do
   context 'when instantiated with missing attributes' do
     let(:attributes) { {} }
 
-    it 'should raise error' do
-      expect { subject }.to raise_error(
+    it 'raises error' do
+      expect { person }.to raise_error(
         Anima::Error,
         'TestClass attributes missing: [:firstname, :lastname], unknown: []'
       )

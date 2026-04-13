@@ -1,0 +1,12 @@
+---
+integration: rspec
+usage: opensource
+mutation:
+  operators: full
+includes:
+  - lib
+requires:
+  - anima
+matcher:
+  subjects:
+    - Anima*

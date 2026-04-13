@@ -1,0 +1,7 @@
+class Anima
+  class Error < RuntimeError
+    FORMAT: String
+
+    def initialize: (Class klass, Array[Symbol] missing, Array[Symbol] unknown) -> void
+  end
+end
