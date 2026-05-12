@@ -13,7 +13,7 @@ jobs:
         ruby: ['3.3', '3.4', '4.0']
     steps:
     - uses: actions/checkout@v6
-    - uses: ruby/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1.306.0
       with:
         ruby-version: ${{ matrix.ruby }}
     - run: |
@@ -30,7 +30,7 @@ jobs:
         ruby: ['3.3', '3.4', '4.0']
     steps:
     - uses: actions/checkout@v6
-    - uses: ruby/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1.306.0
       with:
         ruby-version: ${{ matrix.ruby }}
     - run: |
